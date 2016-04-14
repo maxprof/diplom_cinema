@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cinema:</strong>
+  <%= @place.cinema_id %>
+</p>
+
+<p>
+  <strong>Filmsession:</strong>
+  <%= @place.film_session_id %>
+</p>
+
+<p>
+  <strong>Place number:</strong>
+  <%= @place.place_number %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @place.status %>
+</p>
+
+<%= link_to 'Edit', edit_place_path(@place) %> |
+<%= link_to 'Back', places_path %>

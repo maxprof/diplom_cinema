@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cinema_name: MyString
+  cinema_addr: MyString
+
+two:
+  cinema_name: MyString
+  cinema_addr: MyString
