@@ -4,7 +4,7 @@ class FilmSessionsController < ApplicationController
   # GET /film_sessions
   # GET /film_sessions.json
   def index
-    @film_sessions = FilmSession.all 
+    @film_sessions = FilmSession.all
   end
 
   # GET /film_sessions/1
@@ -17,10 +17,9 @@ class FilmSessionsController < ApplicationController
     @test_test = params[:data_value] || []
     puts @test_test
 
-    
+
     @array_length = params[:array_length]
     puts "Array length  #{@array_length}"
-
 
     if @test_test != []
       render "test"
@@ -41,28 +40,22 @@ class FilmSessionsController < ApplicationController
   def create
     @film_session = FilmSession.new(film_session_params)
 
-    respond_to do |format|
-      if @film_session.save
-        format.html { redirect_to @film_session, notice: 'Film session was successfully created.' }
-        format.json { render :show, status: :created, location: @film_session }
-      else
-        format.html { render :new }
-        format.json { render json: @film_session.errors, status: :unprocessable_entity }
-      end
+    if @film_session.save
+      flash[:success] = "New film session was successufly created"
+      redirect_to film_session_path(@film_session)
+    else
+      render 'new'
     end
   end
 
   # PATCH/PUT /film_sessions/1
   # PATCH/PUT /film_sessions/1.json
   def update
-    respond_to do |format|
-      if @film_session.update(film_session_params)
-        format.html { redirect_to @film_session, notice: 'Film session was successfully updated.' }
-        format.json { render :show, status: :ok, location: @film_session }
-      else
-        format.html { render :edit }
-        format.json { render json: @film_session.errors, status: :unprocessable_entity }
-      end
+    if @film_session.update(film_session_params)
+      flash[:success] = "Film session was successufly updated"
+      redirect_to film_session_path(@film_session)
+    else
+      render 'new'
     end
   end
 
@@ -70,10 +63,8 @@ class FilmSessionsController < ApplicationController
   # DELETE /film_sessions/1.json
   def destroy
     @film_session.destroy
-    respond_to do |format|
-      format.html { redirect_to film_sessions_url, notice: 'Film session was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    flash[:danger] = "Film session was successufly deleted"
+    redirect_to film_sessions_path
   end
 
   private
@@ -86,7 +77,7 @@ class FilmSessionsController < ApplicationController
     def getBookingPlaces
      @places = Place.all
      @placesBySession = @places.where(film_session_id: '1')
-     @result = [] 
+     @result = []
      for i in 0..@placesBySession.length-1
       @result.push(@placesBySession[i].place_number)
      end

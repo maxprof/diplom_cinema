@@ -10,12 +10,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
 </head>
 <body>
-
-<div class="container">
-	<div class="row">
-		<%= yield %>
-	</div>
-</div>
+<%= render 'layouts/navigation' %>
+  <div class="container wrapp">
+    <div class="row">
+      <%= render 'layouts/messages' %>
+      <%= yield %>
+    </div>
+  </div>
+<%= render 'layouts/footer' %>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>

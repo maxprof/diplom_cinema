@@ -26,28 +26,22 @@ class CinemasController < ApplicationController
   def create
     @cinema = Cinema.new(cinema_params)
 
-    respond_to do |format|
-      if @cinema.save
-        format.html { redirect_to @cinema, notice: 'Cinema was successfully created.' }
-        format.json { render :show, status: :created, location: @cinema }
-      else
-        format.html { render :new }
-        format.json { render json: @cinema.errors, status: :unprocessable_entity }
-      end
+    if @cinema.save
+      flash[:success] = "New cinema was successufly created"
+      redirect_to cinema_path(@cinema)
+    else
+      render 'new'
     end
   end
 
   # PATCH/PUT /cinemas/1
   # PATCH/PUT /cinemas/1.json
   def update
-    respond_to do |format|
-      if @cinema.update(cinema_params)
-        format.html { redirect_to @cinema, notice: 'Cinema was successfully updated.' }
-        format.json { render :show, status: :ok, location: @cinema }
-      else
-        format.html { render :edit }
-        format.json { render json: @cinema.errors, status: :unprocessable_entity }
-      end
+    if @cinema.update(cinema_params)
+      flash[:success] = "Cinema was successufly updated"
+      redirect_to film_session_path(@film_session)
+    else
+      render 'new'
     end
   end
 
@@ -55,10 +49,8 @@ class CinemasController < ApplicationController
   # DELETE /cinemas/1.json
   def destroy
     @cinema.destroy
-    respond_to do |format|
-      format.html { redirect_to cinemas_url, notice: 'Cinema was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    flash[:danger] = "Cinema was successufly deleted"
+    redirect_to cinemas_path
   end
 
   private
