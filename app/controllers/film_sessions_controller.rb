@@ -1,5 +1,6 @@
 class FilmSessionsController < ApplicationController
   before_action :set_film_session, only: [:show, :edit, :update, :destroy, :getBookingPlaces]
+  before_action :check_if_admin, only: [:edit, :update, :destroy]
 
   # GET /film_sessions
   # GET /film_sessions.json
@@ -68,6 +69,13 @@ class FilmSessionsController < ApplicationController
   end
 
   private
+
+    def check_if_admin
+      if !user_signed_in? || !current_user.admin? ||
+        flash[:danger] = "You have't access rights for this operation"
+        redirect_to root_path
+      end
+    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_film_session

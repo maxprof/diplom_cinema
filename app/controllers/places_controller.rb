@@ -1,6 +1,6 @@
 class PlacesController < ApplicationController
   before_action :set_place, only: [:show, :edit, :update, :destroy]
-
+  efore_action :check_if_admin, only: [:edit, :update, :destroy]
   # GET /places
   # GET /places.json
   def index
@@ -55,6 +55,12 @@ class PlacesController < ApplicationController
   end
 
   private
+    def check_if_admin
+      if !user_signed_in? || !current_user.admin? ||
+        flash[:danger] = "You have't access rights for this operation"
+        redirect_to root_path
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_place
       @place = Place.find(params[:id])

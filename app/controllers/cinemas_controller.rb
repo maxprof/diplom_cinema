@@ -1,6 +1,6 @@
 class CinemasController < ApplicationController
   before_action :set_cinema, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_if_admin, only: [:edit, :update, :destroy]
   # GET /cinemas
   # GET /cinemas.json
   def index
@@ -54,6 +54,12 @@ class CinemasController < ApplicationController
   end
 
   private
+    def check_if_admin
+      if !user_signed_in? || !current_user.admin? ||
+        flash[:danger] = "You have't access rights for this operation"
+        redirect_to root_path
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_cinema
       @cinema = Cinema.find(params[:id])
