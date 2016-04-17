@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:vkontakte, :facebook]
 
+  has_many :cinemas
+  has_many :film_sessions
+  has_many :places
+
   def self.from_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
         user.provider = auth.provider
@@ -12,3 +16,4 @@ class User < ActiveRecord::Base
       end
   end
 end
+

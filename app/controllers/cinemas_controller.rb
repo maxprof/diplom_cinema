@@ -25,7 +25,7 @@ class CinemasController < ApplicationController
   # POST /cinemas.json
   def create
     @cinema = Cinema.new(cinema_params)
-
+    @cinema.user_id = current_user.id
     if @cinema.save
       flash[:success] = "New cinema was successufly created"
       redirect_to cinema_path(@cinema)
@@ -55,7 +55,7 @@ class CinemasController < ApplicationController
 
   private
     def check_if_admin
-      if !user_signed_in? || !current_user.admin? ||
+      if !user_signed_in? || !current_user.admin?
         flash[:danger] = "You have't access rights for this operation"
         redirect_to root_path
       end
@@ -67,6 +67,6 @@ class CinemasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cinema_params
-      params.require(:cinema).permit(:cinema_name, :cinema_addr)
+      params.require(:cinema).permit(:cinema_name, :cinema_addr, :user_id)
     end
 end

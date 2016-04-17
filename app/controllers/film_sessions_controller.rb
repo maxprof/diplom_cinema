@@ -14,14 +14,8 @@ class FilmSessionsController < ApplicationController
     @booked_places = @film_session.places
     @test = getBookingPlaces
     @place = Place.new
-    @cinema = Cinema.find(params[:id])
     @test_test = params[:data_value] || []
-    puts @test_test
-
-
     @array_length = params[:array_length]
-    puts "Array length  #{@array_length}"
-
     if @test_test != []
       render "test"
     end
@@ -40,6 +34,7 @@ class FilmSessionsController < ApplicationController
   # POST /film_sessions.json
   def create
     @film_session = FilmSession.new(film_session_params)
+    @film_session.user_id = current_user.id
 
     if @film_session.save
       flash[:success] = "New film session was successufly created"
@@ -71,7 +66,7 @@ class FilmSessionsController < ApplicationController
   private
 
     def check_if_admin
-      if !user_signed_in? || !current_user.admin? ||
+      if !user_signed_in? || !current_user.admin?
         flash[:danger] = "You have't access rights for this operation"
         redirect_to root_path
       end
@@ -84,7 +79,7 @@ class FilmSessionsController < ApplicationController
 
     def getBookingPlaces
      @places = Place.all
-     @placesBySession = @places.where(film_session_id: '1')
+     @placesBySession = @places.where(film_session_id: params[:id])
      @result = []
      for i in 0..@placesBySession.length-1
       @result.push(@placesBySession[i].place_number)
@@ -94,6 +89,6 @@ class FilmSessionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def film_session_params
-      params.require(:film_session).permit(:cinema_id, :session_name, :number_of_session_place)
+      params.require(:film_session).permit(:cinema_id, :session_name, :number_of_session_place, :user_id)
     end
 end

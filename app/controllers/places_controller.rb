@@ -1,6 +1,6 @@
 class PlacesController < ApplicationController
   before_action :set_place, only: [:show, :edit, :update, :destroy]
-  efore_action :check_if_admin, only: [:edit, :update, :destroy]
+  before_action :check_if_admin, only: [:edit, :update, :destroy]
   # GET /places
   # GET /places.json
   def index
@@ -25,6 +25,7 @@ class PlacesController < ApplicationController
   # POST /places.json
   def create
     @place = Place.new(place_params)
+    @place.user_id = current_user.id
 
     if @place.save
       flash[:success] = "New place was successufly created"
@@ -56,7 +57,7 @@ class PlacesController < ApplicationController
 
   private
     def check_if_admin
-      if !user_signed_in? || !current_user.admin? ||
+      if !user_signed_in? || !current_user.admin?
         flash[:danger] = "You have't access rights for this operation"
         redirect_to root_path
       end
@@ -68,6 +69,6 @@ class PlacesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def place_params
-      params.require(:place).permit(:cinema_id, :film_session_id, :place_number, :status)
+      params.require(:place).permit(:cinema_id, :film_session_id, :place_number, :status, :user_id)
     end
 end

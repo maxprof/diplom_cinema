@@ -27,7 +27,7 @@
 						<p>Booked!</p>
 					</div>
 			 	</div>
-			 <% else %>	
+			 <% else %>
 
 
 			 	<div class="btn btn-primary place_block" id="place_<%= n %>" style="">
@@ -54,8 +54,7 @@
 
 							  <div class="field">
 							 	<%= f.hidden_field :cinema_id, :value => @film_session.cinema_id %>
-							    <%= f.label :cinema_name %><br>
-							    <p><%= @cinema.cinema_name %></p>
+
 							  </div>
 							 	<%= f.hidden_field :film_session_id, :value => @film_session.id %>
 							 	<%= f.hidden_field :place_number, :value => n %>
@@ -82,7 +81,7 @@
 					</div>
 			 	</div>
 			 <%end%>
-		<% end %>	
+		<% end %>
 		<div class="hidden">
 			<div id="data2">
 				<% if @test_test.present? %>
@@ -90,7 +89,7 @@
 						<%= @test_test %>
 					<% end %>
 				<% end %>
-			</div>	
+			</div>
 		</div>
 
 	</div>

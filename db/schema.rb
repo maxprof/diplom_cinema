@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160414154239) do
+ActiveRecord::Schema.define(version: 20160415101538) do
 
   create_table "cinemas", force: :cascade do |t|
     t.string   "cinema_name"
     t.string   "cinema_addr"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
   end
 
   create_table "film_sessions", force: :cascade do |t|
@@ -26,7 +27,16 @@ ActiveRecord::Schema.define(version: 20160414154239) do
     t.integer  "number_of_session_place"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.integer  "user_id"
   end
+
+  create_table "film_sessions_places", id: false, force: :cascade do |t|
+    t.integer "film_session_id"
+    t.integer "place_id"
+  end
+
+  add_index "film_sessions_places", ["film_session_id"], name: "index_film_sessions_places_on_film_session_id"
+  add_index "film_sessions_places", ["place_id"], name: "index_film_sessions_places_on_place_id"
 
   create_table "places", force: :cascade do |t|
     t.integer  "cinema_id"
@@ -35,6 +45,7 @@ ActiveRecord::Schema.define(version: 20160414154239) do
     t.boolean  "status"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "user_id"
   end
 
   create_table "users", force: :cascade do |t|
