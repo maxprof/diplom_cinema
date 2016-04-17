@@ -14,28 +14,26 @@
 //= require jquery_ujs
 //= require_tree .
 $(document).ready(function() {
-            $array_length = 0;
-
+    $array_length = 0;
     $(".btn.btn-primary.place_block").click(
         function() {
             $(this).toggleClass("btn-warning");
             $a = $('.btn-warning').length
+            console.log($a);
             $arr = [];
-            $array_length +=1
+            $array_length += 1
             $link_id = $(location).attr('href').slice(36);
             $('.btn-warning').each(function() {
                 $place_id = $(this).attr('id').slice(6);
                 $arr.push($place_id);
-                console.log();
             });
 
             if ($a > 1) {
-                $("#main-booking-btn").removeClass("hidden")
-                $(".hidden-block a").addClass("hidden")
+                $(".test_hide").removeClass("hide");
             } else {
-                $("#main-booking-btn").addClass("hidden")
-                $(".hidden-block a").removeClass("hidden")
+                $(".test_hide").addClass("hide");
             }
+
 
             $.ajax({
                 url: "/film_sessions/" + $link_id,

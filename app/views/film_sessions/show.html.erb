@@ -15,7 +15,9 @@
 	</p>
 	<% n = 0 %>
 	<div class="places_block">
-		<a href="#data2" class="btn btn-primary  group2" id="main-booking-btn group2" >Забронировать</a> <br />
+	<div class="test_hide hide">
+		<a href="#data2" class="btn btn-primary group2" id="main-booking-btn group2" >Забронировать</a> <br />
+	</div>
 		<% @film_session.number_of_session_place.times do |session| %>
 			 <% n = n + 1 %>
 			 <% if @test.index(n) != nil %>
@@ -34,9 +36,11 @@
 		 			<p><%= @film_session.cinema.cinema_name %></p>
 					<p><%= @film_session.session_name %></p>
 					<p>Place № <%= n %></p>
+					<% if user_signed_in? %>
 					<div class="hidden-block">
 						<a id="group" href="#data_<%= n %>">Booking</a>
 					</div>
+					<% end %>
 					<div class="hidden">
 						<div id="data_<%= n %>" class="<%= n %>">
 
