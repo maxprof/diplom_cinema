@@ -1,28 +1,21 @@
 class CinemasController < ApplicationController
   before_action :set_cinema, only: [:show, :edit, :update, :destroy]
-  before_action :check_if_admin, only: [:edit, :update, :destroy]
-  # GET /cinemas
-  # GET /cinemas.json
+  before_action :check_if_admin, only: [:new, :edit, :update, :destroy]
+
   def index
     @cinemas = Cinema.all
   end
 
-  # GET /cinemas/1
-  # GET /cinemas/1.json
   def show
   end
 
-  # GET /cinemas/new
   def new
     @cinema = Cinema.new
   end
 
-  # GET /cinemas/1/edit
   def edit
   end
 
-  # POST /cinemas
-  # POST /cinemas.json
   def create
     @cinema = Cinema.new(cinema_params)
     @cinema.user_id = current_user.id
@@ -34,8 +27,6 @@ class CinemasController < ApplicationController
     end
   end
 
-  # PATCH/PUT /cinemas/1
-  # PATCH/PUT /cinemas/1.json
   def update
     if @cinema.update(cinema_params)
       flash[:success] = "Cinema was successufly updated"
@@ -45,8 +36,6 @@ class CinemasController < ApplicationController
     end
   end
 
-  # DELETE /cinemas/1
-  # DELETE /cinemas/1.json
   def destroy
     @cinema.destroy
     flash[:danger] = "Cinema was successufly deleted"
@@ -54,18 +43,19 @@ class CinemasController < ApplicationController
   end
 
   private
+
     def check_if_admin
       if !user_signed_in? || !current_user.admin?
         flash[:danger] = "You have't access rights for this operation"
         redirect_to root_path
       end
     end
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_cinema
       @cinema = Cinema.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+
     def cinema_params
       params.require(:cinema).permit(:cinema_name, :cinema_addr, :user_id)
     end

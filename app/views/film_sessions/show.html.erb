@@ -8,7 +8,7 @@
 	  <strong>Session name:</strong>
 	  <%= @film_session.session_name %>
 	</p>
-		<button class="close" id="close">×</button>
+
 	<p>
 	  <strong>Number of session place:</strong>
 	  <%= @film_session.number_of_session_place %>
@@ -98,5 +98,8 @@
 
 	</div>
 
-<%= link_to 'Edit', edit_film_session_path(@film_session) %> |
-<%= link_to 'Back', film_sessions_path %>
+	<div class="navi-btns">
+		<%= link_to 'Edit', edit_film_session_path(@film_session), class:"btn btn-warning btn-lg" %>
+		<%= link_to 'Back', film_sessions_path, class:"btn btn-danger btn-lg" %>
+	</div>
+

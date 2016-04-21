@@ -18,10 +18,9 @@ $(document).ready(function() {
     $(".btn.btn-primary.place_block").click(
         function() {
             $(this).toggleClass("btn-warning");
-            $a = $('.btn-warning').length
-            console.log($a);
+            $a = $('.btn-warning').length;
             $arr = [];
-            $array_length += 1
+            $array_length += 1 ;
             $link_id = $(location).attr('href').slice(36);
             $('.btn-warning').each(function() {
                 $place_id = $(this).attr('id').slice(6);
@@ -50,12 +49,10 @@ $(document).ready(function() {
                     }
 
                     $("button#close").click(function() {
-                        $choosed_place_length = $('.booking_blocks').length - 1
-                        console.log($choosed_place_length);
+                        $choosed_place_length = $('.booking_blocks').length - 1;
                         $remove_place = this.parentNode;
                         jQuery($remove_place).fadeOut("slow");
-                        $arr.splice($arr.indexOf(this.value), 1);
-                        console.log($arr);
+                        $arr.splice($arr.indexOf(this.value), 1);;
                     });
                     console.log($array_length);
                 },

@@ -18,9 +18,9 @@
         <td><%= film_session.cinema_id %></td>
         <td><%= film_session.session_name %></td>
         <td><%= film_session.number_of_session_place %></td>
-        <td><%= link_to 'Show', film_session %></td>
-        <td><%= link_to 'Edit', edit_film_session_path(film_session) %></td>
-        <td><%= link_to 'Destroy', film_session, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', film_session, class: "btn btn-info" %></td>
+        <td><%= link_to 'Edit', edit_film_session_path(film_session), class: "btn btn-primary" %></td>
+        <td><%= link_to 'Destroy', film_session, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Film session', new_film_session_path %>
+<%= link_to 'New Film session', new_film_session_path,class: "btn btn-primary btn-lg"  %>

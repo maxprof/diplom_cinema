@@ -14,7 +14,7 @@
  *= require_self
 
  */
- 
+
 .place_block{
     width: 150px;
     height: 125px;
@@ -30,7 +30,7 @@
 }
 .hidden-block{
 	overflow: hidden;
-	opacity: 0;	
+	opacity: 0;
 }
 .place_block:hover .hidden-block{
 	opacity: 1;
@@ -53,4 +53,12 @@
   opacity: 0.4;
   filter: alpha(opacity=40);
   cursor: pointer;
+}
+footer.footer {
+    bottom: 0;
+    width: 100%;
+}
+.navi-btns {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

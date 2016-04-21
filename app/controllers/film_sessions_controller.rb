@@ -1,6 +1,7 @@
 class FilmSessionsController < ApplicationController
   before_action :set_film_session, only: [:show, :edit, :update, :destroy, :getBookingPlaces]
   before_action :check_if_admin, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new]
 
   # GET /film_sessions
   # GET /film_sessions.json
