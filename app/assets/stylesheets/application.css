@@ -62,3 +62,16 @@ footer.footer {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+select#film_session_cinema_id {
+    width: 200px;
+    height: 40px;
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+    border-radius: 5px;
+    display: block;
+    font-size: 14px;
+}
+.m20{
+  margin: 20px 0px;
+}

@@ -13,14 +13,15 @@
 
   <div class="field">
     <%= f.label :cinema_name %><br>
-    <%= f.text_field :cinema_name %>
+    <%= f.text_field :cinema_name, class:"form-control" %>
   </div>
   <div class="field">
     <%= f.label :cinema_addr %><br>
-    <%= f.text_field :cinema_addr %>
+    <%= f.text_field :cinema_addr, class:"form-control" %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class:"btn btn-primary m20" %>
+    <%= link_to 'Back', cinemas_path, class:"btn btn-danger m20" %>
   </div>
 <% end %>

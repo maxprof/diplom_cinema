@@ -1,1 +1,21 @@
 <h1>Hi <%= @user.email %></h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Place number</th>
+      <th>Cinema</th>
+      <th>Session name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.places.each do |place| %>
+      <tr>
+        <td><%= place.place_number %></td>
+        <td><%= place.cinema.cinema_name %></td>
+        <% p = place.film_session_id %>
+        <% f = FilmSession.find(id = p) %>
+        <td><%= f.session_name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
