@@ -62,10 +62,15 @@
 							  </div>
 							 	<%= f.hidden_field :film_session_id, :value => @film_session.id %>
 							 	<%= f.hidden_field :place_number, :value => n %>
+							 	<%= f.hidden_field :date, :value => @film_session.date %>
 
 							  <div class="field">
 							    <%= f.label :session_name %><br>
 							    <p><%= @film_session.session_name %></p>
+							  </div>
+							  <div class="field">
+							    <%= f.label :date %><br>
+							    <p><%= @film_session.date %></p>
 							  </div>
 							  <div class="field">
 							    <%= f.label :place_number %><br>
