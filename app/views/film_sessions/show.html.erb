@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<%= image_tag @film_session.film_sessions_poster.url(:medium) %>
 	<p>
 	  <strong>Cinema:</strong>
 	  <%= @film_session.cinema.cinema_name %>
@@ -13,6 +14,19 @@
 	  <strong>Number of session place:</strong>
 	  <%= @film_session.number_of_session_place %>
 	</p>
+		<p>
+	 <strong>Rating:</strong>
+	  <%= @film_session.rating %>
+	</p>
+		<p>
+	  <strong>Description:</strong>
+	  <%= @film_session.description %>
+	</p>
+	<br>
+	<p>
+	  <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @film_session.trailer_link %>" frameborder="0" allowfullscreen></iframe>
+	</p>
+	<br>
 	<% n = 0 %>
 	<div class="places_block">
 	<div class="test_hide hide">
