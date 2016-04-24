@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160424183556) do
+ActiveRecord::Schema.define(version: 20160424185407) do
 
   create_table "cinemas", force: :cascade do |t|
     t.string   "cinema_name"
@@ -45,6 +45,18 @@ ActiveRecord::Schema.define(version: 20160424183556) do
 
   add_index "film_sessions_places", ["film_session_id"], name: "index_film_sessions_places_on_film_session_id"
   add_index "film_sessions_places", ["place_id"], name: "index_film_sessions_places_on_place_id"
+
+  create_table "news", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "news_poster_file_name"
+    t.string   "news_poster_content_type"
+    t.integer  "news_poster_file_size"
+    t.datetime "news_poster_updated_at"
+  end
 
   create_table "places", force: :cascade do |t|
     t.integer  "cinema_id"

@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :cinemas
   has_many :film_sessions
   has_many :places
-
+  has_many :news
   def self.from_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
         user.provider = auth.provider

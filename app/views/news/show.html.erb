@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @news.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @news.description %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @news.user_id %>
+</p>
+<%= image_tag @news.news_poster.url(:medium) %>
+<br/ >
+<br>
+<%= link_to 'Edit', edit_news_path(@news), class:"btn btn-warning btn-lg" %>
+<%= link_to 'Back', news_index_path, class:"btn btn-danger btn-lg" %>
