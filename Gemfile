@@ -50,3 +50,4 @@ gem "twitter-bootstrap-rails"
 gem 'jquery-rails'
 gem 'fancybox2-rails', '~> 0.2.8'
 gem 'jquery-ui-rails'
+

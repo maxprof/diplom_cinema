@@ -9,6 +9,7 @@ class FilmSessionsController < ApplicationController
     @film_sessions = FilmSession.all
   end
 
+
   # GET /film_sessions/1
   # GET /film_sessions/1.json
   def show
