@@ -11,6 +11,8 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 3.0'
   gem 'spring'
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 gem 'gon'
