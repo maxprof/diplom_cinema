@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   has_many :film_sessions
   has_many :places
   has_many :news
+  validates :email, presence: true, uniqueness: true
+
+
   def self.from_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
         user.provider = auth.provider

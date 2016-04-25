@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require rails.validations
 //= require jquery-ui
 //= require_tree .
 

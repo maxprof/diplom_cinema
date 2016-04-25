@@ -26,3 +26,4 @@ gem 'jquery-rails'
 gem 'fancybox2-rails', '~> 0.2.8'
 gem 'jquery-ui-rails'
 gem "paperclip", "~> 4.3"
+gem 'client_side_validations'
