@@ -7,7 +7,6 @@ class FilmSession < ActiveRecord::Base
   validates :cinema_id, presence: true
   validates :number_of_session_place, presence: true
   validates :rating, presence: true, numericality: { greater_than: 0, less_than_or_equal_to: 10 }
-  validates :date, presence: true
   validates :description, presence: true, length: { minimum: 10 }
   validates :trailer_link, presence: true
   validates :film_sessions_poster, presence: true
