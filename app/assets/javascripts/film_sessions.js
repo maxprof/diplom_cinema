@@ -5,7 +5,8 @@ $(document).ready(function() {
         function() {
 
             $(this).toggleClass("btn-warning");
-            $a = $('.btn-warning').length;
+
+            $a = $('.btn-warning').length-1;
             $arr = [];
             $array_length += 1 ;
             $link_id = $(location).attr('href').slice(36);
@@ -19,8 +20,10 @@ $(document).ready(function() {
 
             if ($a > 1) {
                 $(".test_hide").removeClass("hide");
+                $(".hidden-block").addClass("hide");
             } else {
                 $(".test_hide").addClass("hide");
+                $(".hidden-block").removeClass("hide");
             }
 
 

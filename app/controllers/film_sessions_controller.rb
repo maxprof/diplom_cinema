@@ -2,6 +2,7 @@ class FilmSessionsController < ApplicationController
   before_action :set_film_session, only: [:show, :edit, :update, :destroy, :getBookingPlaces]
   before_action :check_if_admin, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new]
+  before_action :delete_overdue_places
 
   # GET /film_sessions
   # GET /film_sessions.json
@@ -66,6 +67,15 @@ class FilmSessionsController < ApplicationController
   end
 
   private
+    def delete_overdue_places
+      @places = Place.all
+      @t = Time.now
+      @places.each do |place|
+        if @t > place.date - 8.hour
+          place.destroy
+        end
+      end
+    end
 
     def check_if_admin
       if !user_signed_in? || !current_user.admin?

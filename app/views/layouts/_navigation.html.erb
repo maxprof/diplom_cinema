@@ -17,6 +17,7 @@
       <ul class="nav navbar-nav">
         <li><%= link_to "Film sessions", film_sessions_path %></li>
         <li><%= link_to "News", news_index_path %></li>
+        <li><%= link_to "Calendar", calendar_path %></li>
 
         <% if user_signed_in? and current_user.admin? %>
           <li class="dropdown">

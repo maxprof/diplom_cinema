@@ -2,10 +2,13 @@ class PlacesController < ApplicationController
   before_action :set_place, only: [:show, :edit, :update, :destroy]
   before_action :check_if_admin, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new]
+  before_action :delete_overdue_places
   # GET /places
   # GET /places.json
   def index
     @places = Place.all
+    flash[:danger] = "This page does not exist"
+    redirect_to root_path
   end
 
   # GET /places/1
@@ -16,10 +19,14 @@ class PlacesController < ApplicationController
   # GET /places/new
   def new
     @place = Place.new
+    flash[:danger] = "This page does not exist"
+    redirect_to root_path
   end
 
   # GET /places/1/edit
   def edit
+    flash[:danger] = "This page does not exist"
+    redirect_to root_path
   end
 
   # POST /places
@@ -46,6 +53,8 @@ class PlacesController < ApplicationController
     else
       render 'new'
     end
+    flash[:danger] = "This page does not exist"
+    redirect_to root_path
   end
 
   # DELETE /places/1
@@ -57,6 +66,16 @@ class PlacesController < ApplicationController
   end
 
   private
+
+    def delete_overdue_places
+      @t = Time.now
+      @places.each do |place|
+        if @t > place.date - 8.hour
+          place.destroy
+        end
+      end
+    end
+
     def check_if_admin
       if !user_signed_in? || !current_user.admin?
         flash[:danger] = "You have't access rights for this operation"
