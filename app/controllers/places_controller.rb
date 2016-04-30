@@ -69,9 +69,15 @@ class PlacesController < ApplicationController
 
     def delete_overdue_places
       @t = Time.now
-      @places.each do |place|
-        if @t > place.date - 8.hour
-          place.destroy
+      if @places
+        @places.each do |place|
+          if @t > place.date - 8.hour
+            place.destroy
+          end
+        end
+      elsif @place
+        if @t > @place.date - 8.hour
+           @place.destroy
         end
       end
     end

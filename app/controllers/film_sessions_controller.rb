@@ -14,6 +14,11 @@ class FilmSessionsController < ApplicationController
   # GET /film_sessions/1
   # GET /film_sessions/1.json
   def show
+    @t = Time.now
+    if @film_session.date < @t
+      flash[:warning] = "On this session is no longer possible to book a place"
+      redirect_to root_path
+    end
     @booked_places = @film_session.places
     @test = getBookingPlaces
     @place = Place.new
