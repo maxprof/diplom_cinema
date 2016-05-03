@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-center">Category: <%= @category.name %></h1>
+
+<% @category_film_sessions.each do |session| %>
+  <div class="session_block">
+    <div class="poster-block">
+      <%= image_tag session.film_sessions_poster.url(:medium) %>
+    </div>
+    <div class="info-block">
+      <p> <%= link_to session.session_name, film_session_path(session) %></p>
+      <p> <%= session.rating %></p>
+      <p> <%= session.date %></p>
+      <p> <%= session.description %></p>
+      <%= link_to "Read", film_session_path(session), class:"btn btn-primary" %>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+<% end %>
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>

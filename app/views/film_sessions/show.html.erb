@@ -26,6 +26,9 @@
 	<p>
 	  <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @film_session.trailer_link %>" frameborder="0" allowfullscreen></iframe> -->
 	</p>
+	<% if @film_session.categories.any? %>
+		<p>Categories: <%= render @film_session.categories %></p>
+	<% end %>
 	<br>
 	<% n = 0 %>
 	<div class="places_block">

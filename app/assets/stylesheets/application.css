@@ -82,6 +82,27 @@ select#film_session_cinema_id {
 .form-control{
   width: 50%!important;
 }
+.badge{
+  background-color: #cef6f5 !important;
+  text-transform: uppercase !important;
+  letter-spacing: -1px !important;
+  font-weight: bold !important;
+}
+.input_checkbox input{
+  width: auto !important;
+}
+
+.session_block{
+  padding: 15px;
+  background-color: rgba(0,0,0,.5);
+  border-radius: 10px;
+  margin: 20px 0px;
+  overflow: hidden;
+}
+.poster-block{
+  float: left;
+  margin-right: 20px;
+}
 
 /*! jQuery UI - v1.12.0-rc.2 - 2016-04-21
 * http://jqueryui.com

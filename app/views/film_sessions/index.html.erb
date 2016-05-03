@@ -23,6 +23,9 @@
         <td><%= film_session.date %></td>
         <td><%= film_session.rating %></td>
         <td><%= link_to 'Show', film_session, class: "btn btn-info" %></td>
+        <% if film_session.categories.any? %>
+          <td><%= render film_session.categories %></td>
+        <% end %>
         <td><%= link_to 'Edit', edit_film_session_path(film_session), class: "btn btn-primary" %></td>
         <td><%= link_to 'Destroy', film_session, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
       </tr>

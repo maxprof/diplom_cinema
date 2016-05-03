@@ -48,6 +48,17 @@
     <%= f.label "Poster" %><br>
     <%= f.file_field :film_sessions_poster %>
   </div>
+
+  <div class="field">
+    <div class="row">
+      <div class="col-sm-offset-0 col-sm-8">
+        <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |cd| %>
+          <%= cd.label(class: "checkbox-inline input_checkbox") { cd.check_box(class: "checkbox") + cd.text } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
   <div class="actions">
     <%= f.submit  class:"btn btn-primary m20" %>
     <%= link_to 'Back', film_sessions_path, class:"btn btn-danger m20" %>
