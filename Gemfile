@@ -8,12 +8,22 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rake', '~> 11.1.2'
+
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '~> 3.0'
   gem 'spring'
   gem "better_errors"
   gem "binding_of_caller"
+end
+
+group :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
+end
+
+group :development do
+  gem 'web-console', '~> 3.0'
 end
 
 gem 'gon'

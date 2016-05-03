@@ -22,10 +22,10 @@ class FilmSessionsController < ApplicationController
     @booked_places = @film_session.places
     @test = getBookingPlaces
     @place = Place.new
-    @test_test = params[:data_value] || []
+    @array_of_places = params[:data_value] || []
     @array_length = params[:array_length]
-    if @test_test != []
-      render "test"
+    if @array_of_places != []
+      render "form_for_places"
     end
   end
 

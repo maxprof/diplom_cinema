@@ -12,6 +12,7 @@ Devise.setup do |config|
   config.password_length = 8..128
   config.reset_password_within = 6.hours
   config.sign_out_via = :get
+  config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
 
   #Add your ID and secret here
   #ID first, secret second
