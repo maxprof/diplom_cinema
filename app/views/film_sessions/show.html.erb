@@ -11,6 +11,11 @@
 	</p>
 
 	<p>
+	  <strong>Price:</strong>
+	  <%= number_to_currency(@film_session.price, :unit => "UAH ")  %>
+	</p>
+
+	<p>
 	  <strong>Number of session place:</strong>
 	  <%= @film_session.number_of_session_place %>
 	</p>
@@ -119,6 +124,7 @@
 		</div>
 
 	</div>
+
 
 	<div class="navi-btns">
 		<%= link_to 'Edit', edit_film_session_path(@film_session), class:"btn btn-warning btn-lg" %>
