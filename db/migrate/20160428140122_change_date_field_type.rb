@@ -3,3 +3,4 @@ class ChangeDateFieldType < ActiveRecord::Migration
     change_column(:film_sessions, :date, :string)
   end
 end
+
