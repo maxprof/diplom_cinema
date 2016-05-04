@@ -9,8 +9,8 @@
     </div>
     <div class="info-block">
       <p> <%= link_to session.session_name, film_session_path(session) %></p>
-      <p> <%= session.rating %></p>
-      <p> <%= session.date %></p>
+      <p> Ranking: <%= session.rating %></p>
+      <p> Date: <%= session.date %></p>
       <p> <%= session.description %></p>
       <%= link_to "Read", film_session_path(session), class:"btn btn-primary" %>
     </div>
