@@ -29,6 +29,7 @@ end
 
 group :production do
   gem 'pg'
+  gem 'rails_12factor'
 end
 
 gem 'gon'
@@ -44,3 +45,4 @@ gem 'fancybox2-rails', '~> 0.2.8'
 gem 'jquery-ui-rails'
 gem "paperclip", "~> 4.3"
 gem 'client_side_validations'
+gem 'liqpay'
