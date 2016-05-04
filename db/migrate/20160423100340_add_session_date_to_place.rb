@@ -1,5 +1,5 @@
 class AddSessionDateToPlace < ActiveRecord::Migration
   def change
-    add_column :places, :date, :date
+    add_column :places, :date, :string
   end
 end
