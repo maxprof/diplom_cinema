@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  devise :database_authenticatable, :registerable, :confirmable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:vkontakte, :facebook]
 
@@ -19,6 +19,5 @@ class User < ActiveRecord::Base
       end
   end
 end
-
 
 
