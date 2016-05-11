@@ -2,18 +2,33 @@ class PlacesController < ApplicationController
   before_action :set_place, only: [:show, :edit, :update, :destroy]
   before_action :check_if_admin, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new]
-  before_action :delete_overdue_places
+  # before_action :delete_overdue_places
   # GET /places
   # GET /places.json
   def index
     @places = Place.all
-    flash[:danger] = "This page does not exist"
-    redirect_to root_path
+    # flash[:danger] = "This page does not exist"
+    # redirect_to root_path
   end
 
   # GET /places/1
   # GET /places/1.json
   def show
+    @film_session_id = @place.film_session_id
+    @searched_film_session = FilmSession.find(@film_session_id)
+    @searched_film_session_price = @searched_film_session.price.to_i
+    @place_title = @searched_film_session.session_name
+
+    if @place.status == false
+      @liqpay_request = Liqpay::Request.new(
+        :amount => @searched_film_session_price,
+        :currency => 'UAH',
+        :description => @place_title,
+        :order_id => @place.id,
+        :result_url => place_url(@place)
+        # :server_url => liqpay_payment_place_url(@place)
+      )
+    end
   end
 
   # GET /places/new

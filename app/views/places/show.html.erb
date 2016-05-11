@@ -16,9 +16,33 @@
 </p>
 
 <p>
+  <strong>Place date:</strong>
+  <%= @place.date %>
+</p>
+
+<p>
+  <strong>Place status:</strong>
+  <%= @place.status %>
+</p>
+
+<p>
   <strong>Status:</strong>
   <%= @place.status %>
 </p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @searched_film_session_price %>
+</p>
+
+<% if @place.status == false %>
+  <p>If you have paid already, the response didn't come in yet from LiqPAY. Refresh this page later.</p>
+  <%=liqpay_button @liqpay_request %>
+<% elsif @place.status == true %>
+  <p>Payment succeeded.</p>
+<% else %>
+  <p>Payment failed.</p>
+<% end %>
 
 <%= link_to 'Edit', edit_place_path(@place) %> |
 <%= link_to 'Back', places_path %>
