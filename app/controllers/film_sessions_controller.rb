@@ -15,6 +15,10 @@ class FilmSessionsController < ApplicationController
   # GET /film_sessions/1.json
   def show
     @t = Time.now
+    if @film_session.session_start_date < @t
+      flash[:warning] = "On this session is no longer possible to book a place"
+      redirect_to root_path
+    end
     @booked_places = @film_session.places
     @test = getBookingPlaces
     @place = Place.new
@@ -37,10 +41,6 @@ class FilmSessionsController < ApplicationController
   # POST /film_sessions
   # POST /film_sessions.json
   def create
-    if @film_session.session_start_date < @t
-      flash[:warning] = "On this session is no longer possible to book a place"
-      redirect_to root_path
-    end
     @film_session = FilmSession.new(film_session_params)
     @film_session.user_id = current_user.id
 

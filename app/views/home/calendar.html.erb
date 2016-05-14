@@ -10,13 +10,11 @@
     <% if @film_sessions %>
       <ul>
         <% @film_sessions.each do |film_session| %>
-          <% if film_session.session_start_date == date.to_s %>
+          <% if film_session.session_start_date == date.to_s || ( film_session.session_start_date < date.to_s and date.to_s <= film_session.session_end_date ) %>
             <li><%= link_to film_session.session_name, film_session %></li>
           <% end %>
         <% end %>
       </ul>
-      <% else %>
-      <h1>Hello</h1>
     <% end %>
   <% end %>
 </div>
