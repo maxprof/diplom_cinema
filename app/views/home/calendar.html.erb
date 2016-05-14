@@ -1,18 +1,22 @@
 <h1>Calendar</h1>
 <div id="film_sessions">
   <h2 id="month">
-    <%= link_to "<", date: @date.prev_month %>
+    <%= link_to "<", session_start_date: @date.prev_month %>
     <%= @date.strftime("%B %Y") %>
-    <%= link_to ">", date: @date.next_month %>
+    <%= link_to ">", session_start_date: @date.next_month %>
   </h2>
   <%= calendar @date do |date| %>
     <%= date.day %>
-    <% if @film_sessions_by_date[date] %>
+    <% if @film_sessions %>
       <ul>
-        <% @film_sessions_by_date[date].each do |film_session| %>
-          <li><%= link_to film_session.session_name, film_session %></li>
+        <% @film_sessions.each do |film_session| %>
+          <% if film_session.session_start_date == date.to_s %>
+            <li><%= link_to film_session.session_name, film_session %></li>
+          <% end %>
         <% end %>
       </ul>
+      <% else %>
+      <h1>Hello</h1>
     <% end %>
   <% end %>
 </div>

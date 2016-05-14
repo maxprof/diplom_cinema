@@ -3,7 +3,6 @@ class HomeController < ApplicationController
   end
   def calendar
     @film_sessions = FilmSession.all
-    @film_sessions_by_date = @film_sessions.group_by(&:date)
-    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    @date = params[:session_start_date] ? Date.parse(params[:session_start_date]) : Date.today
   end
 end

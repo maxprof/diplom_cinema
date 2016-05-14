@@ -15,10 +15,6 @@ class FilmSessionsController < ApplicationController
   # GET /film_sessions/1.json
   def show
     @t = Time.now
-    if @film_session.date < @t
-      flash[:warning] = "On this session is no longer possible to book a place"
-      redirect_to root_path
-    end
     @booked_places = @film_session.places
     @test = getBookingPlaces
     @place = Place.new
@@ -41,6 +37,10 @@ class FilmSessionsController < ApplicationController
   # POST /film_sessions
   # POST /film_sessions.json
   def create
+    if @film_session.session_start_date < @t
+      flash[:warning] = "On this session is no longer possible to book a place"
+      redirect_to root_path
+    end
     @film_session = FilmSession.new(film_session_params)
     @film_session.user_id = current_user.id
 
@@ -107,6 +107,6 @@ class FilmSessionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def film_session_params
-      params.require(:film_session).permit(:date, :cinema_id, :session_name, :number_of_session_place, :user_id, :description, :rating, :trailer_link, :film_sessions_poster, :price, category_ids: [])
+      params.require(:film_session).permit(:session_start_date, :cinema_id, :session_name, :number_of_session_place, :user_id, :description, :rating, :trailer_link, :film_sessions_poster, :price, :session_end_date, category_ids: [])
     end
 end
