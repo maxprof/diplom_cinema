@@ -1,0 +1,22 @@
+<%= form_for(@session_time) do |f| %>
+  <% if @session_time.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@session_time.errors.count, "error") %> prohibited this session_time from being saved:</h2>
+
+      <ul>
+      <% @session_time.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :session_time %><br>
+    <%= f.text_field :session_time, class:"form-control"%>
+  </div>
+  <br/>
+  <div class="actions">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

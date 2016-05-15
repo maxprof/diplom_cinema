@@ -1,5 +1,7 @@
 class FilmSession < ActiveRecord::Base
 	belongs_to :cinema
+  has_many :film_session_session_times
+  has_many :session_times, through: :film_session_session_times
   has_many :film_session_categories
   has_many :categories, through: :film_session_categories
 	has_many :places, :dependent => :destroy
