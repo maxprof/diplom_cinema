@@ -17,7 +17,7 @@
         <% p = place.film_session_id %>
         <% f = FilmSession.find(id = p) %>
         <td><%= f.session_name %></td>
-        <td><%= place.date %></td>
+        <td><%= place.session_start_date %></td>
       </tr>
     <% end %>
   </tbody>

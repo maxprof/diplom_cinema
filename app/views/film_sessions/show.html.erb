@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
 <%= image_tag @film_session.film_sessions_poster.url(:medium) %>
+<h1>Session time: <%= @session_time %></h1> <br />
+<h1>Session day: <%= @session_day%></h1>
+
 	<p>
 	  <strong>Cinema:</strong>
 	  <%= @film_session.cinema.cinema_name %>
@@ -85,6 +88,8 @@
 							 	<%= f.hidden_field :film_session_id, :value => @film_session.id %>
 							 	<%= f.hidden_field :place_number, :value => n %>
 							 	<%= f.hidden_field :session_start_date, :value => @film_session.session_start_date %>
+							 	<%= f.hidden_field :session_time, :value => @session_time %>
+							 	<%= f.hidden_field :session_date, :value => @session_day %>
 
 							  <div class="field">
 							    <%= f.label :session_name %><br>
