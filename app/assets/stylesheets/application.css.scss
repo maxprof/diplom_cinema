@@ -103,4 +103,6 @@ select#film_session_cinema_id {
   float: left;
   margin-right: 20px;
 }
-
+td.notmonth > ul {
+    display: none;
+}

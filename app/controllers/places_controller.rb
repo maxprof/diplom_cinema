@@ -86,12 +86,12 @@ class PlacesController < ApplicationController
       @t = Time.now
       if @places
         @places.each do |place|
-          if @t > place.date - 8.hour
+          if @t > place.session_start_date - 8.hour
             place.destroy
           end
         end
       elsif @place
-        if @t > @place.date - 8.hour
+        if @t > @place.session_start_date - 8.hour
            @place.destroy
         end
       end
@@ -110,6 +110,6 @@ class PlacesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def place_params
-      params.require(:place).permit(:date,:cinema_id, :film_session_id, :place_number, :status, :user_id)
+      params.require(:place).permit(:session_start_date, :cinema_id, :film_session_id, :place_number, :status, :user_id)
     end
 end

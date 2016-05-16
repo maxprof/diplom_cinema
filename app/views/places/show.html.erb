@@ -2,12 +2,16 @@
 
 <p>
   <strong>Cinema:</strong>
-  <%= @place.cinema_id %>
+  <% cinema_id = @place.cinema_id %>
+  <% cinema = Cinema.find(id = cinema_id) %>
+  <%= cinema.cinema_name %>
 </p>
 
 <p>
   <strong>Filmsession:</strong>
-  <%= @place.film_session_id %>
+  <% session_id = @place.film_session_id %>
+  <% session = FilmSession.find(id = session_id) %>
+  <%= session.session_name %>
 </p>
 
 <p>
@@ -17,22 +21,17 @@
 
 <p>
   <strong>Place date:</strong>
-  <%= @place.date %>
+  <%= @place.session_start_date %>
 </p>
 
 <p>
-  <strong>Place status:</strong>
-  <%= @place.status %>
-</p>
-
-<p>
-  <strong>Status:</strong>
+  <strong>Payment status:</strong>
   <%= @place.status %>
 </p>
 
 <p>
   <strong>Price:</strong>
-  <%= @searched_film_session_price %>
+  <%= @searched_film_session_price %> UAH
 </p>
 
 <% if @place.status == false %>

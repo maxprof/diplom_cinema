@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160515103958) do
+ActiveRecord::Schema.define(version: 20160515160754) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -81,10 +81,10 @@ ActiveRecord::Schema.define(version: 20160515103958) do
     t.integer  "film_session_id"
     t.integer  "place_number"
     t.boolean  "status"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "user_id"
-    t.string   "date"
+    t.string   "session_start_date"
   end
 
   create_table "session_times", force: :cascade do |t|

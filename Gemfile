@@ -47,3 +47,4 @@ gem "paperclip", "~> 4.3"
 gem 'client_side_validations'
 gem 'liqpay'
 gem 'figaro'
+gem 'table_print'

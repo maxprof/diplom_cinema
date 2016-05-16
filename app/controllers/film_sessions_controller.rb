@@ -2,7 +2,6 @@ class FilmSessionsController < ApplicationController
   before_action :set_film_session, only: [:show, :edit, :update, :destroy, :getBookingPlaces]
   before_action :check_if_admin, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new]
-  # before_action :delete_overdue_places
 
   # GET /film_sessions
   # GET /film_sessions.json
@@ -16,8 +15,8 @@ class FilmSessionsController < ApplicationController
   def show
     @t = Time.now
     if @film_session.session_start_date < @t
-      flash[:warning] = "On this session is no longer possible to book a place"
       redirect_to root_path
+      flash[:warning] = "On this session is no longer possible to book a place"
     end
     @booked_places = @film_session.places
     @test = getBookingPlaces
@@ -72,16 +71,6 @@ class FilmSessionsController < ApplicationController
   end
 
   private
-    def delete_overdue_places
-      @places = Place.all
-      @t = Time.now
-      @places.each do |place|
-        place.date.to_date
-        if @t > place.date - 8.hour
-          place.destroy
-        end
-      end
-    end
 
     def check_if_admin
       if !user_signed_in? || !current_user.admin?
