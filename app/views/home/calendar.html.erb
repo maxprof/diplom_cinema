@@ -11,22 +11,25 @@
       <ul>
         <% @film_sessions.each do |film_session| %>
           <% if film_session.session_start_date == date.to_s || ( film_session.session_start_date < date.to_s and date.to_s <= film_session.session_end_date ) %>
-            <li>
-              <%= film_session.session_name %>
-              <ul>
-                <% film_session.film_session_session_times.each do |time| %>
-                  <% @time_id = time.session_time_id %>
-                  <% session_time = SessionTime.find(id = @time_id).session_time  %>
-                  <li><%= link_to session_time, "/film_sessions/#{film_session.id}?session_time=#{session_time}&day=#{date}" %></li>
-                <% end %>
-              </ul>
-            </li>
+            <% if date.to_s > Date.today.to_s %>
+              <li>
+                  <p><%= film_session.session_name %></p>
+                  <ul>
+                    <% film_session.film_session_session_times.each do |time| %>
+                      <% @time_id = time.session_time_id %>
+                      <% session_time = SessionTime.find(id = @time_id).session_time  %>
+                      <li><%= link_to session_time, film_session_path(:session_time=>session_time,:day=>date, :id=>film_session.id) %></li>
+                    <% end %>
+                  </ul>
+              </li>
+            <% end %>
           <% end %>
         <% end %>
       </ul>
     <% end %>
   <% end %>
 </div>
+
 
 
 

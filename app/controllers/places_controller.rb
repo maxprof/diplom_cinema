@@ -68,21 +68,6 @@ class PlacesController < ApplicationController
 
   private
 
-    def delete_overdue_places
-      @t = Time.now
-      if @places
-        @places.each do |place|
-          if @t > place.session_start_date - 8.hour
-            place.destroy
-          end
-        end
-      elsif @place
-        if @t > @place.session_start_date - 8.hour
-           @place.destroy
-        end
-      end
-    end
-
     def check_if_admin
       if !user_signed_in? || !current_user.admin?
         flash[:danger] = "You have't access rights for this operation"

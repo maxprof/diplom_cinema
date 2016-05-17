@@ -2,7 +2,7 @@ class FilmSessionsController < ApplicationController
   before_action :set_film_session, only: [:edit, :update, :destroy, :getBookingPlaces]
   before_action :check_if_admin, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new]
-
+  before_action :check_time_to_redirect, only: [:show]
   def index
     @film_sessions = FilmSession.all
   end
@@ -12,14 +12,15 @@ class FilmSessionsController < ApplicationController
     @film_session = FilmSession.find(params[:id])
     @session_time = params[:session_time]
     @session_day = params[:day]
-    puts "----------------"
-    puts @session_time
-    puts "----------------"
+
+      if @session_time == nil || @session_day == nil || @session_day  < Date.today.to_s
+        flash[:danger] = "Sessions with such parameters do not exist"
+        return redirect_to '/calendar'
+      else
+
+      end
+
     @t = Time.now
-    if @film_session.session_start_date < @t
-      redirect_to root_path
-      flash[:warning] = "On this session is no longer possible to book a place"
-    end
     @booked_places = @film_session.places
     @test = getBookingPlaces
     @place = Place.new
@@ -65,6 +66,21 @@ class FilmSessionsController < ApplicationController
   end
 
   private
+
+    def check_time_to_redirect
+      @session_times_list = SessionTime.all
+      @session_times_list.each do |times_list|
+        if @session_time.to_s != times_list.session_time.to_s
+          flash[:danger] = "Sessions with such parameters do not exist"
+            puts  "----------------------"
+            puts  times_list.session_time
+            puts  @session_time.nil?
+            puts  @session_time.to_s == times_list.session_time.to_s
+
+          return redirect_to '/calendar'
+        end
+      end
+    end
 
     def check_if_admin
       if !user_signed_in? || !current_user.admin?

@@ -5,8 +5,10 @@
       <th>Place number</th>
       <th>Cinema</th>
       <th>Session name</th>
-      <th>Date</th>
-
+      <th>Place</th>
+      <th>Session date</th>
+      <th>Session time</th>
+      <th>Payment status</th>
     </tr>
   </thead>
   <tbody>
@@ -17,7 +19,11 @@
         <% p = place.film_session_id %>
         <% f = FilmSession.find(id = p) %>
         <td><%= f.session_name %></td>
-        <td><%= place.session_start_date %></td>
+        <td><%= place.place_number %></td>
+        <td><%= place.session_date %></td>
+        <td><%= place.session_time %></td>
+        <td><%= place.status %></td>
+
       </tr>
     <% end %>
   </tbody>
