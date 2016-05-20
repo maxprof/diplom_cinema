@@ -1,4 +1,5 @@
 class FilmSessionsController < ApplicationController
+  before_action :delete_old_places, only: [:show]
   before_action :set_film_session, only: [:show, :edit, :update, :destroy, :getBookingPlaces]
   before_action :check_if_admin, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new]
@@ -70,6 +71,20 @@ class FilmSessionsController < ApplicationController
   end
 
   private
+
+  def delete_old_places
+    @film_sessions_places = FilmSession.all
+    @film_sessions_places.each do |film_session_place|
+      film_session_place.places.each do |place|
+        if Date.today.to_s > place.session_date
+          place.delete
+          puts "------------"
+          puts place.session_date
+          puts "------------"
+        end
+      end
+    end
+  end
 
     def check_if_admin
       if !user_signed_in? || !current_user.admin?
