@@ -1,25 +1,29 @@
 class FilmSessionsController < ApplicationController
-  before_action :set_film_session, only: [:edit, :update, :destroy, :getBookingPlaces]
+  before_action :set_film_session, only: [:show, :edit, :update, :destroy, :getBookingPlaces]
   before_action :check_if_admin, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new]
-  before_action :check_time_to_redirect, only: [:show]
+
   def index
     @film_sessions = FilmSession.all
   end
 
 
   def show
-    @film_session = FilmSession.find(params[:id])
     @session_time = params[:session_time]
     @session_day = params[:day]
 
-      if @session_time == nil || @session_day == nil || @session_day  < Date.today.to_s
-        flash[:danger] = "Sessions with such parameters do not exist"
-        return redirect_to '/calendar'
-      else
+    @list_of_session_times = @film_session.session_times.where(session_time: @session_time)
 
-      end
+    if @list_of_session_times.empty?
+      @times_presence = false
+    else
+      @times_presence = true
+    end
 
+    if !@times_presence || @session_time == nil || @session_day == nil || @session_day  < Date.today.to_s || @session_day > @film_session.session_end_date
+       flash[:danger] = "Sessions with such parameters do not exist"
+       return redirect_to calendar_url
+    end
     @t = Time.now
     @booked_places = @film_session.places
     @test = getBookingPlaces
@@ -66,21 +70,6 @@ class FilmSessionsController < ApplicationController
   end
 
   private
-
-    def check_time_to_redirect
-      @session_times_list = SessionTime.all
-      @session_times_list.each do |times_list|
-        if @session_time.to_s != times_list.session_time.to_s
-          flash[:danger] = "Sessions with such parameters do not exist"
-            puts  "----------------------"
-            puts  times_list.session_time
-            puts  @session_time.nil?
-            puts  @session_time.to_s == times_list.session_time.to_s
-
-          return redirect_to '/calendar'
-        end
-      end
-    end
 
     def check_if_admin
       if !user_signed_in? || !current_user.admin?
