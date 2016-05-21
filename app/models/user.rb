@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :film_sessions
   has_many :places
   has_many :news
+  has_many :comments
   validates :email, presence: true, uniqueness: true
 
 

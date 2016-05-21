@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     $array_length = 0;
-    $(".btn.btn-primary.place_block").click(
+    $(".btn.btn-info.place_block").click(
         function() {
 
             $(this).toggleClass("btn-warning");

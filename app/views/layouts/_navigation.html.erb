@@ -38,8 +38,11 @@
             <% end %>
           </ul>
           <form class="navbar-form navbar-left">
-            <div class="form-group is-empty">
-              <input type="text" class="form-control col-md-8" placeholder="Search">
+            <div class="form-group search_margin">
+              <%= form_tag film_sessions_path, :method => 'get', class:"navbar-form navbar-left" do %>
+                <%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Search" %>
+                <%= submit_tag "Search", class:"btn btn-raised btn-primary" %>
+              <% end %>
             <span class="material-input"></span></div>
           </form>
           <ul class="nav navbar-nav navbar-right">
@@ -55,3 +58,4 @@
     </div>
   </div>
 </nav>
+

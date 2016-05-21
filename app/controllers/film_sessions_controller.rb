@@ -29,6 +29,8 @@ class FilmSessionsController < ApplicationController
 
     end
 
+    @comments = Comment.where(commentable_id: @film_session.id)
+    puts @comments
     @t = Time.now
     @booked_places = @film_session.places
     @test = getBookingPlaces

@@ -120,9 +120,19 @@
 				<% end %>
 			</div>
 		</div>
-
 	</div>
 
+	<div class="container">
+		<div class="row">
+				<% @comments.each do |comment| %>
+					<div class="well bs-component comments">
+						<span class="text-left"><%= comment.id %></span>
+						<span class="text-right" style="float: right" ><%= comment.created_at.to_date %></span>
+						<p class="mt20"><%= comment.body %></p>
+					</div>
+				<% end %>
+			</div>
+		</div>
 
 	<div class="navi-btns">
 		<%= link_to 'Edit', edit_film_session_path(@film_session), class:"btn btn-warning btn-lg" %>
