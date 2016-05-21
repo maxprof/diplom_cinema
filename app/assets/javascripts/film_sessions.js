@@ -6,53 +6,55 @@ $(document).ready(function() {
 
             $(this).toggleClass("btn-warning");
 
-            $a = $('.btn-warning').length-1;
             $arr = [];
             $array_length += 1 ;
             $link_id = $(location).attr('href').slice(36);
 
             $('.btn-warning').each(function() {
-                // $place_id = $(this).attr('id').slice(6);
                 $place_id = $(this).attr('id');
-                console.log($place_id);
+                $place_id = $place_id.slice(6);
                 $arr.push($place_id);
-            });
-
-            if ($a > 1) {
-                $(".test_hide").removeClass("hide");
-                $(".hidden-block").addClass("hide");
-            } else {
-                $(".test_hide").addClass("hide");
-                $(".hidden-block").removeClass("hide");
-            }
 
 
-            $.ajax({
-                url: "/film_sessions/" + $link_id,
-                type: "get",
-                data: { data_value: $arr, array_length: $array_length },
-                complete: function() {},
-                success: function(data) {
-                    $array_length = $arr.length;
-                    if ($('#data2').html() == '') {
-                        $('#data2').append(data);
-                    } else {
-                        $('#data2').empty();
-                        $('#data2').append(data);
-                    }
-
-                    $("button#close").click(function() {
-                        $choosed_place_length = $('.booking_blocks').length - 1;
-                        $remove_place = this.parentNode;
-                        jQuery($remove_place).fadeOut("slow");
-                        $arr.splice($arr.indexOf(this.value), 1);;
-                    });
-                },
-                error: function() {
-                    alert("Ajax error!")
+                if ($arr.length > 1) {
+                    $(".test_hide").removeClass("hide");
+                    $(".hidden-block").addClass("hide");
+                } else {
+                    $(".test_hide").addClass("hide");
+                    $(".hidden-block").removeClass("hide");
                 }
+
+                $.ajax({
+                    url: "/film_sessions/" + $link_id,
+                    type: "get",
+                    data: { data_value: $arr, array_length: $array_length },
+                    complete: function() {},
+                    success: function(data) {
+                        $array_length = $arr.length;
+                        if ($('#data2').html() == '') {
+                            $('#data2').append(data);
+                        } else {
+                            $('#data2').empty();
+                            $('#data2').append(data);
+                        }
+
+                        $("button#close").click(function() {
+                            $choosed_place_length = $('.booking_blocks').length - 1;
+                            $remove_place = this.parentNode;
+                            jQuery($remove_place).fadeOut("slow");
+                            $arr.splice($arr.indexOf(this.value), 1);;
+                        });
+                    },
+                    error: function() {
+                        alert("Ajax error!")
+                    }
+                });
             });
+
         });
+
+
+
 
     $("a#group").fancybox({
         'hideOnContentClick': true

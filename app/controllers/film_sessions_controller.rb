@@ -24,12 +24,23 @@ class FilmSessionsController < ApplicationController
     if !@times_presence || @session_time == nil || @session_day == nil || @session_day  < Date.today.to_s || @session_day > @film_session.session_end_date
        flash[:danger] = "Sessions with such parameters do not exist"
        return redirect_to calendar_url
+     else
+
+
     end
+
     @t = Time.now
     @booked_places = @film_session.places
     @test = getBookingPlaces
     @place = Place.new
     @array_of_places = params[:data_value] || []
+
+    if @array_of_places.length > 1
+      puts @array_of_places.length
+    else
+      puts "small"
+    end
+
     @array_length = params[:array_length]
     if @array_of_places != []
       render "form_for_places"
