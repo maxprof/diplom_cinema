@@ -32,13 +32,15 @@ class FilmSessionsController < ApplicationController
     @t = Time.now
     @booked_places = @film_session.places
     @test = getBookingPlaces
-    @place = Place.new
+
     @array_of_places = params[:data_value] || []
+      @place = Place.new
 
     if @array_of_places.length > 1
-      puts @array_of_places.length
-    else
-      puts "small"
+      @array_for_save = []
+      @array_of_places.length.times do |save_record|
+        @array_for_save << Place.new
+      end
     end
 
     @array_length = params[:array_length]

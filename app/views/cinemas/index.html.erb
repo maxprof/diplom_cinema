@@ -14,11 +14,12 @@
   <tbody>
     <% @cinemas.each do |cinema| %>
       <tr>
-        <td><%= cinema.cinema_name %></td>
-        <td><%= cinema.cinema_addr %></td>
-        <td><%= link_to 'Show', cinema, class: "btn btn-info" %></td>
-        <td><%= link_to 'Edit', edit_cinema_path(cinema), class: "btn btn-primary" %></td>
-        <td><%= link_to 'Destroy', cinema, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+        <td><p> <%= cinema.cinema_name %></p></td>
+        <td><p> <%= cinema.cinema_addr %></p></td>
+        <% if user_signed_in? and current_user.admin? %>
+          <td><%= link_to 'Edit', edit_cinema_path(cinema), class: "btn btn-primary" %></td>
+          <td><%= link_to 'Destroy', cinema, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

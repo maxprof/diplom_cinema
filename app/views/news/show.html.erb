@@ -1,21 +1,16 @@
 <p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3  col-sm-3 col-xs-12 mt25">
+      <%= image_tag @news.news_poster.url(:medium), class:"img-responsive" %>
+    </div>
+    <div class="col-md-9 col-sm-9 col-xs-12 ">
+      <h3><%= @news.title %></h3>
+      <p><%= @news.description %></p>
+      <%= link_to 'Edit', edit_news_path(@news), class:"btn btn-raised btn-warning" %>
+      <%= link_to 'Back', news_index_path, class:"btn btn-raised btn-danger" %>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @news.title %>
-</p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @news.description %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @news.user_id %>
-</p>
-<%= image_tag @news.news_poster.url(:medium) %>
-<br/ >
-<br>
-<%= link_to 'Edit', edit_news_path(@news), class:"btn btn-warning btn-lg" %>
-<%= link_to 'Back', news_index_path, class:"btn btn-danger btn-lg" %>

@@ -14,48 +14,76 @@
 
 
   <div class="control-group">
-    <%= f.label :cinema_id, class:"control-group" %>
+    <%= f.label :cinema_id, class:"col-md-2 control-group" %>
     <div class="controls">
       <%= collection_select( :film_session, :cinema_id, Cinema.all, :id, :cinema_name, {}, { :multiple => false } ) %>
     </div>
   </div>
 
-  <div class="field">
-    <%= f.label :session_name %><br>
-    <%= f.text_field :session_name, class:"form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label :session_start_date %><br>
-    <%= f.text_field :session_start_date, class:"form-control datepicker" %>
-  </div>
-    <div class="field">
-    <%= f.label :session_end_date %><br>
-    <%= f.text_field :session_end_date, class:"form-control datepicker" %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.number_field :price, class:"form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label :number_of_session_place %><br>
-    <%= f.number_field :number_of_session_place, class:"form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description, class:"form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label :trailer_link %><br>
-    <%= f.text_field :trailer_link, class:"form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label :rating %><br>
-    <%= f.number_field :rating, class:"form-control", :step => 'any' %>
-  </div>
-  <div class="field">
-    <%= f.label "Poster" %><br>
-    <%= f.file_field :film_sessions_poster %>
-  </div>
+ <div class="form-group is-empty">
+    <label class="col-md-2 control-label">Session name</label>
+    <div class="col-md-10">
+      <%= f.text_field :session_name, class:"form-control" %>
+   </div>
+ </div>
+
+ <div class="form-group is-empty">
+    <label class="col-md-2 control-label">Session start date</label>
+    <div class="col-md-10">
+      <%= f.text_field :session_start_date, class:"form-control datepicker" %>
+   </div>
+ </div>
+
+ <div class="form-group is-empty">
+    <label class="col-md-2 control-label">Session end date</label>
+    <div class="col-md-10">
+      <%= f.text_field :session_end_date, class:"form-control datepicker" %>
+   </div>
+ </div>
+
+ <div class="form-group is-empty">
+    <label class="col-md-2 control-label">Price</label>
+    <div class="col-md-10">
+      <%= f.number_field :price, class:"form-control" %>
+   </div>
+ </div>
+
+ <div class="form-group is-empty">
+    <label class="col-md-2 control-label">Number of session place</label>
+    <div class="col-md-10">
+      <%= f.number_field :number_of_session_place, class:"form-control" %>
+   </div>
+ </div>
+
+ <div class="form-group is-empty">
+    <label class="col-md-2 control-label">Description</label>
+    <div class="col-md-10">
+      <%= f.text_area :description, class:"form-control" %>
+   </div>
+ </div>
+
+ <div class="form-group is-empty">
+    <label class="col-md-2 control-label">Trailer link</label>
+    <div class="col-md-10">
+      <%= f.text_field :trailer_link, class:"form-control" %>
+   </div>
+ </div>
+
+ <div class="form-group is-empty">
+    <label class="col-md-2 control-label">Rating</label>
+    <div class="col-md-10">
+      <%= f.number_field :rating, class:"form-control" %>
+   </div>
+ </div>
+
+    <div class="form-group is-empty is-fileinput">
+      <label class="col-md-2 control-label">Poster</label>
+       <div class="col-md-10">
+        <input type="text" class="form-control" placeholder="Browse...">
+        <%= f.file_field :film_sessions_poster %>
+      </div>
+    <span class="material-input"></span></div>
+
 
   <div class="field">
     <div class="row">
@@ -77,9 +105,13 @@
     </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit  class:"btn btn-primary m20" %>
-    <%= link_to 'Back', film_sessions_path, class:"btn btn-danger m20" %>
+
+  <div class="form-group">
+   <div class="col-md-10 col-md-offset-2">
+     <%= link_to 'Back', film_sessions_path, class:"btn btn-raised btn-default" %>
+     <%= f.submit class:"btn btn-raised btn-primary m20" %>
+    </div>
   </div>
+
 <% end %>
 
