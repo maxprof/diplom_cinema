@@ -15,15 +15,15 @@
         <%= session.description %>
       </div>
       <div class="mdl-card__actions">
-        <%= link_to "Book Place", calendar_path, class:"btn btn-raised btn-warning" %>
+           <%= link_to "Book Place", calendar_path, class:"btn btn-raised btn-warning" %>
+        <% if user_signed_in? and current_user.admin? %>
+          <%= link_to "Edit", edit_film_session_path(session), class:"btn btn-raised btn-primary" %>
+        <% end %>
       </div>
     </div>
   </section>
   <div class="mt20"></div>
   <% end %>
-
-  <%= link_to 'Edit', edit_category_path(@category) %> |
-  <%= link_to 'Back', categories_path %>
 
   </div>
 </div>

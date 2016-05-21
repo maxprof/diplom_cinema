@@ -119,6 +119,7 @@ section.section--center.mdl-grid.mdl-grid--no-spacing.mdl-shadow--2dp {
 header.section__play-btn.mdl-cell.mdl-cell--3-col-desktop.mdl-cell--2-col-tablet.mdl-cell--4-col-phone.mdl-color--teal-100.mdl-color-text--white > img {
     max-width: 100%;
     height: auto;
+    padding: 7px;
 }
 .footer {
     margin-top: 20px;
@@ -158,4 +159,18 @@ th {
 }
 td>span.badge {
     margin-top: 20px;
+}
+.hidden-block>a {
+    font-size: 16px;
+    color: #fff;
+    text-decoration: underline;
+}
+p.place_number {
+    margin-top: 45px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.hidden-block > a:hover{
+  color: #fff;
+  text-decoration: none;
 }
