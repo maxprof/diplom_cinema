@@ -25,8 +25,6 @@ class FilmSessionsController < ApplicationController
        flash[:danger] = "Sessions with such parameters do not exist"
        return redirect_to calendar_url
      else
-
-
     end
 
     @comments = Comment.where(commentable_id: @film_session.id)
@@ -64,7 +62,7 @@ class FilmSessionsController < ApplicationController
 
     if @film_session.save
       flash[:success] = "New film session was successufly created"
-      redirect_to film_session_path(@film_session)
+      redirect_to calendar_path
     else
       render 'new'
     end

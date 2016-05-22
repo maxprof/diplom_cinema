@@ -1,5 +1,93 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
-<% if user_signed_in? %>
-	<p><%= current_user.email %></p>
-<% end %>
+<div class="well bs-component">
+    <div class="row">
+        <div class="col-md-4">
+            <%= image_tag @film_session.film_sessions_poster.url, class:"img-responsive"  %>
+        </div>
+
+        <div class="col-md-8">
+            <h1><%= @film_session.session_name %></h1>
+            <p>Release: <b> <%= @film_session.session_start_date %> </b></p>
+            <p>Genre:
+                <% @film_session.categories.each do |category| %>
+                    <%= link_to category.name, category_path(category) %>
+                <% end %>
+            </p>
+            <p> Ranking: <b><%= @film_session.rating %></b></p>
+            <p><%= @film_session.description %></p>
+            <%= link_to "Choose session", calendar_path, class:"btn btn-raised btn-primary " %>
+            <a class="various fancybox.iframe btn btn-raised btn-warning" href="https://www.youtube.com/embed/<%= @film_session.trailer_link %>" >Trailer</a>
+        </div>
+    </div>
+</div>
+
+<div class="well bs-component">
+    <div class="row">
+        <div class="col-sm-3 col-xs-6">
+            <a href="#">
+                <img class="img-responsive portfolio-item" src="http://nerdreactor.com/wp-content/uploads/2015/01/warcraft-film-500x300_c.jpeg?394dcb"  alt="">
+            </a>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+            <a href="#">
+                <img class="img-responsive portfolio-item" src="https://1.bp.blogspot.com/-DIQ6y8nV260/VuL-b0ysSPI/AAAAAAAAAJ0/dyWIyt7W73UlOEKA27jPSKp7o-DwLebDg/s1600/Captain-America-Civil-War-Official-Trailer-2-Hollywood-Movie-2016.jpg"  alt="">
+            </a>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+            <a href="#">
+                <img class="img-responsive portfolio-item" src="http://www.comicbookresources.com/imgsrv/imglib/500/300/1/apoca-social-f8cf0.jpg"  alt="">
+            </a>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+            <a href="#">
+                <img class="img-responsive portfolio-item" src="http://tiffanyyong.com/wp-content/uploads/2014/08/teenage-mutant-ninja-turtles-movie-poster-500x300.jpg"  alt="">
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="well bs-component">
+    <div class="row">
+        <iframe width="auto" height="515" src="https://www.youtube.com/embed/<%= @film_session.trailer_link %>" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+
+<div class="well bs-component">
+    <div class="row">
+        <div class="col-md-6 col-sm-12-col-xs-12 reklam_block_margin">
+            <b><h2 class="text-muted">Don't be late,</h2></b>
+            <b> <h1 class="text-warning">Book your ticket now!</h1></b>
+            <h3 class="text-muted">Easy, simple & fast.</h3>
+            <%= link_to '<i class="fa fa-ticket" aria-hidden="true"></i> Book ticket'.html_safe, calendar_path, class:"btn btn-raised btn-warning " %>
+
+        </div>
+        <div class="col-md-6 col-sm-12-col-xs-12 main_news_block">
+            <h2 class="text-muted">News</h2>
+            <hr>
+            <% @news.each do |news| %>
+                <div class="news_block">
+                    <p class="news_title"><%= news.title %></p>
+                    <p class="text-muted"><%= news.created_at.to_date %></p>
+                    <p><%= news.description %></p>
+                </div>
+                <%= link_to "Read more", news_path(news), class:"btn btn-raised btn-primary " %>
+                <hr>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+   $(".various").fancybox({
+      maxWidth : 800,
+      maxHeight : 800,
+      fitToView : false,
+      width : '70%',
+      height : '70%',
+      autoSize : false,
+      closeClick : false,
+      openEffect : 'none',
+      closeEffect : 'none'
+   });
+});
+</script>
