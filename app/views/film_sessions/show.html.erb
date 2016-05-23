@@ -134,8 +134,31 @@
 			</div>
 		</div>
 
-	<div class="navi-btns">
-		<%= link_to 'Edit', edit_film_session_path(@film_session), class:"btn btn-warning btn-lg" %>
-		<%= link_to 'Back', film_sessions_path, class:"btn btn-danger btn-lg" %>
-	</div>
+	<div class="container">
+		<div class="row">
+				<div class="well bs-component comments">
+					<%= form_for Comment.new do |f| %>
+						<div class="form-group is-empty">
+						   <label class="col-md-2 control-label">Comment:</label>
+						   <div class="col-md-10">
+						     <%= f.text_area :body, class:"form-control" %>
+						  </div>
+						</div>
+						<%= f.hidden_field :commentable_id, :value => @film_session.id %>
+						<%= f.hidden_field :commentable_type, :value => "FilmSession" %>
+
+						<div class="form-group">
+						 <div class="col-md-10 col-md-offset-2">
+						   <%= link_to 'Back', film_sessions_path, class:"btn btn-raised btn-default" %>
+						   <%= f.submit class:"btn btn-raised btn-primary m20" %>
+						  </div>
+						</div>
+					<% end %>
+					<div class="navi-btns">
+						<br>
+					</div>
+				</div>
+			</div>
+		</div>
+
 

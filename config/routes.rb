@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :session_times
   resources :categories
   resources :news
+  resources :comments
   resources :cinemas
   resources :film_sessions
   resources :places

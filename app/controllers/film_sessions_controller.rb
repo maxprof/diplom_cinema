@@ -5,13 +5,21 @@ class FilmSessionsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
 
   def index
-    @film_sessions = FilmSession.all
+
+    @film_sessions = FilmSession.where(["session_name LIKE ?","%#{params[:search]}%"])
+    @film_sessions = FilmSession.where(["session_name LIKE ?","%#{params[:search]}%"])
   end
 
 
   def show
+    session[:id] = @film_session.id
+    puts session[:id]
+    #Get params from calendar
+
     @session_time = params[:session_time]
     @session_day = params[:day]
+
+    # get list of session times for this FilmSession
 
     @list_of_session_times = @film_session.session_times.where(session_time: @session_time)
 
@@ -21,20 +29,25 @@ class FilmSessionsController < ApplicationController
       @times_presence = true
     end
 
+    # Check if FelmSession with this parameters presence
+
     if !@times_presence || @session_time == nil || @session_day == nil || @session_day  < Date.today.to_s || @session_day > @film_session.session_end_date
        flash[:danger] = "Sessions with such parameters do not exist"
        return redirect_to calendar_url
      else
     end
 
+    # Get comments
+
     @comments = Comment.where(commentable_id: @film_session.id)
-    puts @comments
+
+    # functional for places array
+
     @t = Time.now
     @booked_places = @film_session.places
     @test = getBookingPlaces
-
     @array_of_places = params[:data_value] || []
-      @place = Place.new
+    @place = Place.new
 
     if @array_of_places.length > 1
       @array_for_save = []
@@ -50,6 +63,7 @@ class FilmSessionsController < ApplicationController
   end
 
   def new
+    binding.pry
     @film_session = FilmSession.new
   end
 
@@ -85,19 +99,16 @@ class FilmSessionsController < ApplicationController
 
   private
 
-  def delete_old_places
-    @film_sessions_places = FilmSession.all
-    @film_sessions_places.each do |film_session_place|
-      film_session_place.places.each do |place|
-        if Date.today.to_s > place.session_date
-          place.delete
-          puts "------------"
-          puts place.session_date
-          puts "------------"
+    def delete_old_places
+      @film_sessions_places = FilmSession.all
+      @film_sessions_places.each do |film_session_place|
+        film_session_place.places.each do |place|
+          if Date.today.to_s > place.session_date
+            place.delete
+          end
         end
       end
     end
-  end
 
     def check_if_admin
       if !user_signed_in? || !current_user.admin?
