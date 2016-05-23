@@ -13,7 +13,7 @@ class FilmSessionsController < ApplicationController
 
   def show
     session[:id] = @film_session.id
-    puts session[:id]
+    session[:type] = "FilmSession"
     #Get params from calendar
 
     @session_time = params[:session_time]

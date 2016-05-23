@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
 
     @comment = current_user.comments.create(comments_params)
     @comment.commentable_id = session[:id]
-    @comment.commentable_type ="FilmSession"
+    @comment.commentable_type = session[:type]
 
     if @comment.save
       flash[:success] = "New comment was successufly added"
