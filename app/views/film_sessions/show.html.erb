@@ -140,18 +140,18 @@
 				<% end %>
 			</div>
 		</div>
-
+<% if user_signed_in? && current_user.login != nil %>
 	<div class="container">
 		<div class="row">
 				<div class="well bs-component comments">
 					<%= form_for Comment.new do |f| %>
-						<div class="col-md-1">
+						<div class="col-md-2">
       				<%= image_tag current_user.avatar.url, class:"img-responsive" %>
-
+							<p>Login: <%= current_user.login %></p>
 						</div>
 						<div class="form-group is-empty">
 						   <label class="col-md-2 control-label">Comment:</label>
-						   <div class="col-md-9">
+						   <div class="col-md-8">
 						     <%= f.text_area :body, class:"form-control" %>
 						  </div>
 						</div>
@@ -170,5 +170,9 @@
 				</div>
 			</div>
 		</div>
-
-
+<% else %>
+	<div class="well bs-component comments">
+			<h2 class="text-warning text-center">To leave a comment, you need to be logged in and choose login in profile </h2>
+		<div class="clearfix"></div>
+	</div>
+<% end %>
