@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'calendar', to: 'home#calendar'
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
   get 'users/:id' => 'users#show', :as => :user
+  resources :users, except: [:show]
   root 'home#index'
   post '/liqpay_payment' => 'payments#liqpay_payment'
 end

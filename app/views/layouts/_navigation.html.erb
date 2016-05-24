@@ -22,6 +22,9 @@
             <li><%= link_to "News", news_index_path %></li>
             <li><%= link_to "Calendar", calendar_path %></li>
             <li><%= link_to "Categories", categories_path %></li>
+            <% if user_signed_in? %>
+                  <li><%= link_to "Profile", current_user %></li>
+            <% end %>
             <% if user_signed_in? and current_user.admin? %>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Actions <span class="caret"></span></a>
@@ -37,13 +40,13 @@
               </li>
             <% end %>
           </ul>
-<%= form_tag film_sessions_path, :method => 'get', class:"navbar-form navbar-left" do %>
-  <div class="form-group search_margin">
-    <%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Search" %>
-    <%= submit_tag "Search", class:"btn btn-raised btn-primary" %>
-    <span class="material-input"></span>
-  </div>
-<% end %>
+          <%= form_tag film_sessions_path, :method => 'get', class:"navbar-form navbar-left" do %>
+            <div class="form-group search_margin">
+              <%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Search" %>
+              <%= submit_tag "Search", class:"btn btn-raised btn-primary" %>
+              <span class="material-input"></span>
+            </div>
+          <% end %>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
               <li><%= link_to 'Logout', destroy_user_session_path, :method => :get %></li>

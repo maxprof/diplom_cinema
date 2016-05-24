@@ -126,9 +126,16 @@
 		<div class="row">
 				<% @comments.each do |comment| %>
 					<div class="well bs-component comments">
-						<span class="text-left"><%= comment.id %></span>
-						<span class="text-right" style="float: right" ><%= comment.created_at.to_date %></span>
-						<p class="mt20"><%= comment.body %></p>
+						<div class="col-md-1">
+							<% @this_comment = comment %>
+							<%= puts @this_comment %>
+							<% @user_comment = User.find(id = @this_comment.user_id ) %>
+      				<%= image_tag @user_comment.avatar.url, class:"img-responsive" %>
+      				<br>
+							<span><%= comment.created_at.to_date %></span>
+						</div>
+						<p><%= comment.body %></p>
+						<div class="clearfix"></div>
 					</div>
 				<% end %>
 			</div>
@@ -138,24 +145,27 @@
 		<div class="row">
 				<div class="well bs-component comments">
 					<%= form_for Comment.new do |f| %>
+						<div class="col-md-1">
+      				<%= image_tag current_user.avatar.url, class:"img-responsive" %>
+
+						</div>
 						<div class="form-group is-empty">
 						   <label class="col-md-2 control-label">Comment:</label>
-						   <div class="col-md-10">
+						   <div class="col-md-9">
 						     <%= f.text_area :body, class:"form-control" %>
 						  </div>
 						</div>
 						<%= f.hidden_field :commentable_id, :value => @film_session.id %>
 						<%= f.hidden_field :commentable_type, :value => "FilmSession" %>
-
 						<div class="form-group">
 						 <div class="col-md-10 col-md-offset-2">
 						   <%= link_to 'Back', film_sessions_path, class:"btn btn-raised btn-default" %>
 						   <%= f.submit class:"btn btn-raised btn-primary m20" %>
 						  </div>
 						</div>
+						<div class="clearfix"></div>
 					<% end %>
 					<div class="navi-btns">
-						<br>
 					</div>
 				</div>
 			</div>

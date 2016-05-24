@@ -234,3 +234,39 @@ a.btn.btn-social-icon {
 a.btn.btn-social-icon:hover{
   background-color: #f44336!important;
 }
+img.avatar_img{
+  width: 200px;
+  height: 200px;
+
+}
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+.user_info{
+  text-align: center;
+  img{
+    margin: 0 auto;
+  }
+  label.col-md-3.control-label {
+      margin-left: 100px;
+      font-size: 14px;
+  }
+}
+img.img-responsive.img-circle.avatar_img {
+    margin: 0 auto;
+}
+.form-group.is-empty.is-fileinput.user_group {
+    width: 50%;
+    margin: 0 auto;
+    label.col-md-3.control-label {
+        margin-left: 150px;
+    }
+}
+.well.bs-component.comments {
+  div{
+    span{
+      font-size: 12px!important;
+    }
+  }
+}

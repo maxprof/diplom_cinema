@@ -1,30 +1,78 @@
-<h1>Hi <%= @user.email %></h1>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Place number</th>
-      <th>Cinema</th>
-      <th>Session name</th>
-      <th>Place</th>
-      <th>Session date</th>
-      <th>Session time</th>
-      <th>Payment status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @user.places.each do |place| %>
-      <tr>
-        <td><%= place.place_number %></td>
-        <td><%= place.cinema.cinema_name %></td>
-        <% p = place.film_session_id %>
-        <% f = FilmSession.find(id = p) %>
-        <td><%= f.session_name %></td>
-        <td><%= place.place_number %></td>
-        <td><%= place.session_date %></td>
-        <td><%= place.session_time %></td>
-        <td><%= place.status %></td>
+<div class="well bs-component comments">
+  <h1 class="text-center">Hi <%= @user.email %></h1>
+  <% if !@user.avatar_file_name %>
+    <div class="user_info col-md-5 col-md-offset-2">
+      <div class="row">
+        <%= image_tag("http://agapoff.name/wp-content/uploads/2009/12/gravatar.jpg", class:"img-responsive img-circle avatar_img") %>
+        <%= form_for @user do |form| %>
+          <div class="form-group is-empty is-fileinput">
+            <label class="col-md-3  control-label">Choose your avatar</label>
+            <div class="col-md-5">
+              <input type="text" class="form-control" placeholder="Browse...">
+              <%= form.file_field :avatar %>
+            </div>
+            <span class="material-input"></span>
+            <div class="form-group">
+              <div class="col-md-10 col-md-offset-1">
+                 <%= form.submit "Update user avatar", class:"btn btn-raised btn-danger m20" %>
+              </div>
+            </div>
+          </div>
+          <br />
+        <% end %>
+      </div>
+    <div class="clearfix"></div>
+  <% else %>
+      <%= image_tag @user.avatar.url(:medium), class:"img-responsive img-circle avatar_img" %>
+        <%= form_for @user do |form| %>
+          <div class="form-group is-empty is-fileinput user_group">
+            <label class="col-md-3 control-label">Choose your avatar</label>
+            <div class="col-md-5">
+              <input type="text" class="form-control" placeholder="Browse...">
+              <%= form.file_field :avatar %>
+            </div>
+            <span class="material-input"></span>
+            <div class="form-group">
+              <div class="col-md-offset-4">
+                 <%= form.submit "Update user avatar", class:"btn btn-raised btn-danger m20" %>
+              </div>
+            </div>
+          </div>
+          <br />
+        <% end %>
+      </div>
+  <% end %>
 
+
+<div class="well bs-component comments">
+  <h2 class="text-center">This is your booked places</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Place number</th>
+        <th>Cinema</th>
+        <th>Session name</th>
+        <th>Place</th>
+        <th>Session date</th>
+        <th>Session time</th>
+        <th>Payment status</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @user.places.each do |place| %>
+        <tr>
+          <td><%= place.place_number %></td>
+          <td><%= place.cinema.cinema_name %></td>
+          <% p = place.film_session_id %>
+          <% f = FilmSession.find(id = p) %>
+          <td><%= f.session_name %></td>
+          <td><%= place.place_number %></td>
+          <td><%= place.session_date %></td>
+          <td><%= place.session_time %></td>
+          <td><%= place.status %></td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
