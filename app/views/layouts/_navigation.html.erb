@@ -37,14 +37,13 @@
               </li>
             <% end %>
           </ul>
-          <form class="navbar-form navbar-left">
-            <div class="form-group search_margin">
-              <%= form_tag film_sessions_path, :method => 'get', class:"navbar-form navbar-left" do %>
-                <%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Search" %>
-                <%= submit_tag "Search", class:"btn btn-raised btn-primary" %>
-              <% end %>
-            <span class="material-input"></span></div>
-          </form>
+<%= form_tag film_sessions_path, :method => 'get', class:"navbar-form navbar-left" do %>
+  <div class="form-group search_margin">
+    <%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Search" %>
+    <%= submit_tag "Search", class:"btn btn-raised btn-primary" %>
+    <span class="material-input"></span>
+  </div>
+<% end %>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
               <li><%= link_to 'Logout', destroy_user_session_path, :method => :get %></li>
