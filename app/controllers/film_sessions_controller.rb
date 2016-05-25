@@ -5,7 +5,6 @@ class FilmSessionsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
 
   def index
-
     @film_sessions = FilmSession.where(["session_name LIKE ?","%#{params[:search]}%"])
     @film_sessions = FilmSession.where(["description LIKE ?","%#{params[:search]}%"])
   end
@@ -39,7 +38,7 @@ class FilmSessionsController < ApplicationController
 
     # Get comments
 
-    @comments = Comment.where(commentable_id: @film_session.id)
+    @comments = Comment.where(commentable_id: @film_session.id).paginate(page: params[:page], per_page: 5)
 
     # functional for places array
 
@@ -63,7 +62,6 @@ class FilmSessionsController < ApplicationController
   end
 
   def new
-    binding.pry
     @film_session = FilmSession.new
   end
 

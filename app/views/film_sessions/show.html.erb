@@ -122,24 +122,29 @@
 		</div>
 	</div>
 
+
 	<div class="container">
 		<div class="row">
-				<% @comments.each do |comment| %>
-					<div class="well bs-component comments">
-						<div class="col-md-1">
-							<% @this_comment = comment %>
-							<%= puts @this_comment %>
-							<% @user_comment = User.find(id = @this_comment.user_id ) %>
-      				<%= image_tag @user_comment.avatar.url, class:"img-responsive" %>
-      				<br>
-							<span><%= comment.created_at.to_date %></span>
-						</div>
-						<p><%= comment.body %></p>
-						<div class="clearfix"></div>
+			<% @comments.each do |comment| %>
+				<div class="well bs-component comments">
+					<div class="col-md-1">
+						<% @this_comment = comment %>
+						<%= puts @this_comment %>
+						<% @user_comment = User.find(id = @this_comment.user_id ) %>
+    				<%= image_tag @user_comment.avatar.url, class:"img-responsive" %>
+    				<br>
+						<span><%= comment.created_at.to_date %></span>
 					</div>
-				<% end %>
-			</div>
+					<p><%= comment.body %></p>
+					<div class="clearfix"></div>
+				</div>
+			<% end %>
 		</div>
+	</div>
+
+<div align="center">
+	<%= will_paginate @comments %>
+</div>
 <% if user_signed_in? && current_user.login != nil %>
 	<div class="container">
 		<div class="row">

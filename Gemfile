@@ -48,5 +48,7 @@ gem 'client_side_validations'
 gem 'liqpay'
 gem 'figaro'
 gem 'table_print'
-gem 'fancybox2-rails', '~> 0.2.8'
 gem 'pry'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
+
