@@ -15,12 +15,17 @@ group :development, :test do
   gem "better_errors"
   gem "binding_of_caller"
   gem 'sqlite3'
+  gem 'rspec-rails'
+  gem 'cucumber-rails'
 end
 
 group :test do
-  gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
+  gem 'capybara'
   gem 'database_cleaner'
+  gem 'email_spec'
+  gem 'timecop'
+  gem 'launchy'
 end
 
 group :development do
