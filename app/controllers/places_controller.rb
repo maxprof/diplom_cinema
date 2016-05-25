@@ -89,7 +89,10 @@ class PlacesController < ApplicationController
       end
     end
     def set_place
-      @place = Place.find(params[:id])
+      @place = Place.where(id: params[:id]).limit(1).first
+      if !@place.present?
+        redirect_to '/errors/not_found'
+      end
     end
 
     def place_params

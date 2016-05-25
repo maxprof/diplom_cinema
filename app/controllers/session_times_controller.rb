@@ -64,7 +64,10 @@ class SessionTimesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_session_time
-      @session_time = SessionTime.find(params[:id])
+      @session_time = SessionTime.where(id: params[:id]).limit(1).first
+      if !@session_time.present?
+        redirect_to '/errors/not_found'
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

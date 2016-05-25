@@ -1,7 +1,7 @@
 class FilmSessionsController < ApplicationController
   before_action :delete_old_places, only: [:show]
   before_action :set_film_session, only: [:show, :edit, :update, :destroy, :getBookingPlaces]
-  before_action :check_if_admin, only: [:edit, :update, :destroy]
+  before_action :check_if_admin, only: [:new, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new]
 
   def index
@@ -11,6 +11,7 @@ class FilmSessionsController < ApplicationController
 
 
   def show
+
     session[:id] = @film_session.id
     session[:type] = "FilmSession"
     #Get params from calendar
@@ -116,7 +117,10 @@ class FilmSessionsController < ApplicationController
     end
 
     def set_film_session
-      @film_session = FilmSession.find(params[:id])
+      @film_session = FilmSession.where(id: params[:id]).limit(1).first
+      if !@film_session.present?
+        redirect_to '/errors/not_found'
+      end
     end
 
     def getBookingPlaces

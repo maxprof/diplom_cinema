@@ -58,3 +58,9 @@ html,
 body {
   height: 100%;
 }
+img.not_found{
+  margin: 0 auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}

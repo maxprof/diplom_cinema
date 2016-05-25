@@ -11,6 +11,7 @@ module Myappdigital
     config.assets.precompile += %w( bootstrap-material-design.css )
     config.assets.precompile += %w( ripples.min.css )
     config.assets.precompile += %w( material.min.js )
+    config.exceptions_app = self.routes
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

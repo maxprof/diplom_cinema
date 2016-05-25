@@ -52,7 +52,10 @@ class CinemasController < ApplicationController
     end
 
     def set_cinema
-      @cinema = Cinema.find(params[:id])
+      @cinema = Cinema.where(id: params[:id]).limit(1).first
+      if !@cinema.present?
+        redirect_to '/errors/not_found'
+      end
     end
 
 

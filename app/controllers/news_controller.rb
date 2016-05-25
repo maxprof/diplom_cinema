@@ -66,7 +66,10 @@ class NewsController < ApplicationController
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_news
-      @news = News.find(params[:id])
+      @news = News.where(id: params[:id]).limit(1).first
+      if !@news.present?
+        redirect_to '/errors/not_found'
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
