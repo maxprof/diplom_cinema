@@ -16,7 +16,6 @@ group :development, :test do
   gem "binding_of_caller"
   gem 'sqlite3'
   gem 'rspec-rails'
-  gem 'cucumber-rails'
 end
 
 group :test do
@@ -26,6 +25,7 @@ group :test do
   gem 'email_spec'
   gem 'timecop'
   gem 'launchy'
+  gem 'cucumber-rails'
 end
 
 group :development do
