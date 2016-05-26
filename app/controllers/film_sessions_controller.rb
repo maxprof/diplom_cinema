@@ -5,8 +5,7 @@ class FilmSessionsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
 
   def index
-    @film_sessions = FilmSession.where(["session_name LIKE ?","%#{params[:search]}%"])
-    @film_sessions = FilmSession.where(["description LIKE ?","%#{params[:search]}%"])
+    @film_sessions = FilmSession.search(params[:search])
   end
 
 

@@ -7,3 +7,4 @@ FactoryGirl.define do
     commentable_id 1
   end
 end
+
