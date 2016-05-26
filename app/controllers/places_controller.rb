@@ -40,6 +40,8 @@ class PlacesController < ApplicationController
   def create
     @place = Place.new(place_params)
     @place.user_id = current_user.id
+    @place.status = false
+
 
     if @place.save
       flash[:success] = "New place was successufly created"
