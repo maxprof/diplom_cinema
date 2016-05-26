@@ -3,35 +3,32 @@
       <% if @comment.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comments from being saved:</h2>
-
           <ul>
-          <% @comment.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
+            <% @comment.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
           </ul>
         </div>
       <% end %>
-        <div class="well bs-component comments">
-          <%= form_for @comment do |f| %>
-            <div class="form-group is-empty">
-               <label class="col-md-2 control-label">Comment:</label>
-               <div class="col-md-10">
-                 <%= f.text_area :body, class:"form-control" %>
-              </div>
+        <%= form_for @comment do |f| %>
+          <div class="form-group is-empty">
+             <label class="col-md-2 control-label">Comment:</label>
+             <div class="col-md-10">
+               <%= f.text_area :body, class:"form-control" %>
             </div>
-            <%= f.hidden_field :commentable_id, :value => @film_session.id %>
-            <%= f.hidden_field :commentable_type, :value => "FilmSession" %>
-
-            <div class="form-group">
-             <div class="col-md-10 col-md-offset-2">
-               <%= link_to 'Back', film_sessions_path, class:"btn btn-raised btn-default" %>
-               <%= f.submit class:"btn btn-raised btn-primary m20" %>
-              </div>
-            </div>
-          <% end %>
-          <div class="navi-btns">
-            <br>
           </div>
+          <%= f.hidden_field :commentable_id, :value => @film_session_id %>
+          <%= f.hidden_field :commentable_type, :value => "FilmSession" %>
+
+          <div class="form-group">
+           <div class="col-md-10 col-md-offset-2">
+             <%= link_to 'Back', film_sessions_path, class:"btn btn-raised btn-default" %>
+             <%= f.submit class:"btn btn-raised btn-primary m20" %>
+            </div>
+          </div>
+        <% end %>
+        <div class="navi-btns">
+        <br />
         </div>
       </div>
     </div>

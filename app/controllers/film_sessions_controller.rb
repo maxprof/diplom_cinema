@@ -39,7 +39,7 @@ class FilmSessionsController < ApplicationController
 
     # Get comments
 
-    @comments = Comment.where(commentable_id: @film_session.id).paginate(page: params[:page], per_page: 5)
+    @comments = Comment.where(commentable_id: @film_session.id).order(created_at: :desc).paginate(page: params[:page], per_page: 5)
 
     # functional for places array
 

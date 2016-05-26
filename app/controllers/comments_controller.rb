@@ -1,11 +1,12 @@
 class CommentsController < ApplicationController
 
   def new
+    # @film_session_id =
     @comment = Comment.new
   end
 
   def create
-
+    @film_session_id = session[:id]
     @comment = current_user.comments.create(comments_params)
     @comment.commentable_id = session[:id]
     @comment.commentable_type = session[:type]
@@ -25,4 +26,5 @@ class CommentsController < ApplicationController
     end
 
 end
+
 

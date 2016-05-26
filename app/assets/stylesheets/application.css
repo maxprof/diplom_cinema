@@ -64,3 +64,16 @@ img.not_found{
   max-width: 100%;
   height: auto;
 }
+#error_explanation {
+  color: #f00;
+  text-align: center;
+}
+#error_explanation ul{
+  list-style: none;
+  margin: 0 0 18px 0;
+}
+
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
+ }
