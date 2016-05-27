@@ -22,7 +22,6 @@
             <li><%= link_to "News", news_index_path %></li>
             <li><%= link_to "Calendar", calendar_path %></li>
             <li><%= link_to "Categories", categories_path %></li>
-            <li><%= link_to "Advanced search", new_search_path %></li>
             <% if user_signed_in? %>
                   <li><%= link_to "Profile", current_user %></li>
             <% end %>
