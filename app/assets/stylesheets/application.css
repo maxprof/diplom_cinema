@@ -77,3 +77,6 @@ img.not_found{
   @extend .control-group;
   @extend .error;
  }
+.col-sm-offset-0.col-sm-8.mt20 {
+    margin-top: 30px;
+}

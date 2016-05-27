@@ -1,0 +1,10 @@
+<h1>Search result</h1>
+  <% if  @search.search_film_sessions.empty? %>
+    <p>No records found</p>
+  <% else %>
+    <% @search.search_film_sessions.each do |c| %>
+      <div class="">
+        <h1><%= c.price %></h1>
+      </div>
+    <% end %>
+  <% end %>

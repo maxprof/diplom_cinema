@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160524175053) do
+ActiveRecord::Schema.define(version: 20160526203657) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -96,6 +96,15 @@ ActiveRecord::Schema.define(version: 20160524175053) do
     t.string   "session_start_date"
     t.string   "session_time"
     t.string   "session_date"
+  end
+
+  create_table "searches", force: :cascade do |t|
+    t.string   "keywords"
+    t.string   "category"
+    t.decimal  "max_price"
+    t.float    "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "session_times", force: :cascade do |t|

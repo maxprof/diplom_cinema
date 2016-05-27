@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :cinemas
   resources :film_sessions
   resources :places
+  resources :searches
   get 'home/index'
   get 'calendar', to: 'home#calendar'
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }

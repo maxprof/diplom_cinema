@@ -5,9 +5,12 @@ class FilmSessionsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
 
   def index
-    @film_sessions = FilmSession.search(params[:search])
+    if params[:search].nil?
+      @film_sessions = FilmSession.all
+    else
+      @film_sessions = FilmSession.search(params[:search])
+    end
   end
-
 
   def show
 
