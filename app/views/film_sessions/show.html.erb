@@ -66,45 +66,11 @@
 					<div class="hidden">
 						<div id="data_<%= n %>" class="<%= n %>">
 
-							<%= form_for(@place) do |f| %>
-							  <% if @place.errors.any? %>
-							    <div id="error_explanation">
-							      <h2><%= pluralize(@place.errors.count, "error") %> prohibited this place from being saved:</h2>
-							      <ul>
-							      <% @place.errors.full_messages.each do |message| %>
-							        <li><%= message %></li>
-							      <% end %>
-							      </ul>
-							    </div>
-							  <% end %>
-
-							  <div class="field">
-							 	<%= f.hidden_field :cinema_id, :value => @film_session.cinema_id %>
-
-							  </div>
-							 	<%= f.hidden_field :film_session_id, :value => @film_session.id %>
-							 	<%= f.hidden_field :place_number, :value => n %>
-							 	<%= f.hidden_field :session_start_date, :value => @film_session.session_start_date %>
-							 	<%= f.hidden_field :session_time, :value => @session_time %>
-							 	<%= f.hidden_field :session_date, :value => @session_day %>
-
-							  <div class="field">
-							    <%= f.label :session_name %><br>
-							    <p><%= @film_session.session_name %></p>
-							  </div>
-							  <div class="field">
-							    <%= f.label :session_start_date %><br>
-							    <p><%= @film_session.session_start_date %></p>
-							  </div>
-							  <div class="field">
-							    <%= f.label :place_number %><br>
-							    <p><%= n %></p>
-							  </div>
-							  <br/>
+							<%= form_for Place.new do |f| %>
+								<%= render partial: "shared/place", locals: {f: f, n: n} %>
 							  <div class="actions">
 							    <%= f.submit "Booking", :class => "btn btn-raised btn-primary" %>
 							  </div>
-
 							<% end %>
 						</div>
 					</div>

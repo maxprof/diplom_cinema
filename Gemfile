@@ -16,6 +16,7 @@ group :development, :test do
   gem "binding_of_caller"
   gem 'sqlite3'
   gem 'rspec-rails'
+  gem 'traceroute'
 end
 
 group :test do
@@ -56,4 +57,5 @@ gem 'table_print'
 gem 'pry'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+gem 'rack-mini-profiler'
 

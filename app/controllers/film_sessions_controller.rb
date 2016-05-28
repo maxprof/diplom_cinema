@@ -1,5 +1,6 @@
 class FilmSessionsController < ApplicationController
   before_action :delete_old_places, only: [:show]
+  before_action :check_booking_time, only: [:show]
   before_action :set_film_session, only: [:show, :edit, :update, :destroy, :getBookingPlaces]
   before_action :check_if_admin, only: [:new, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new]
@@ -14,7 +15,7 @@ class FilmSessionsController < ApplicationController
   end
 
   def show
-
+    #create params for comments
     session[:id] = @film_session.id
     session[:type] = "FilmSession"
     #Get params from calendar
@@ -27,7 +28,7 @@ class FilmSessionsController < ApplicationController
     else
       @times_presence = true
     end
-    # Check if FelmSession with this parameters presence
+    # Check if FilmSession with this parameters presence
     if !@times_presence || @session_time == nil || @session_day == nil || @session_day  < Date.today.to_s || @session_day > @film_session.session_end_date
        flash[:danger] = "Sessions with such parameters do not exist"
        return redirect_to calendar_url
@@ -35,21 +36,14 @@ class FilmSessionsController < ApplicationController
     end
     # Get comments
     @comments = Comment.where(commentable_id: @film_session.id).order(created_at: :desc).paginate(page: params[:page], per_page: 5)
-    # functional for places array
+    # functional for places
     @t = Time.now
     @booked_places = @film_session.places
     @test = getBookingPlaces
     @array_of_places = params[:data_value] || []
-    @place = Place.new
-    if @array_of_places.length > 1
-      @array_for_save = []
-      @array_of_places.length.times do |save_record|
-        @array_for_save << Place.new
-      end
-    end
     @array_length = params[:array_length]
     if @array_of_places != []
-      render "form_for_places"
+      render "form_for_places", :layout => false
     end
   end
 
@@ -111,6 +105,18 @@ class FilmSessionsController < ApplicationController
       @film_session = FilmSession.where(id: params[:id]).limit(1).first
       if !@film_session.present?
         redirect_to '/errors/not_found'
+      end
+    end
+
+    def check_booking_time
+      @places = Place.all
+      @places.each do |place_booked_time|
+        if place_booked_time.status == false
+          @test_time = Time.now.to_s.to_time - place_booked_time.created_at.to_s.to_time
+          if @test_time.to_i > 3.hours.to_i
+            place_booked_time.destroy
+          end
+        end
       end
     end
 

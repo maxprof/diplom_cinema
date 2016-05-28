@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :session_times
   resources :categories
   resources :news
-  resources :comments
+  resources :comments, only: [:new, :create]
   resources :cinemas
   resources :film_sessions
   resources :places
