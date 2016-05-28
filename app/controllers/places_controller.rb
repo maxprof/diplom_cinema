@@ -5,31 +5,16 @@ class PlacesController < ApplicationController
   before_action :authenticate_user!, only: [:new]
   before_action :check_booking_time, except: [:index]
 
-
   def index
     @places = Place.all
   end
 
   def show
-    cinema_id = @place.cinema_id
-    @cinema = Cinema.find(id = cinema_id)
-    session_id = @place.film_session_id
-    @session = FilmSession.find(id = session_id)
-    @film_session_id = @place.film_session_id
-    @searched_film_session = FilmSession.find(@film_session_id)
-    @searched_film_session_price = @searched_film_session.price.to_i
-    @place_title = @searched_film_session.session_name
-
-    if @place.status == false
-      @liqpay_request = Liqpay::Request.new(
-        :amount => @searched_film_session_price,
-        :currency => 'UAH',
-        :description => @place_title,
-        :order_id => @place.id,
-        :result_url => place_url(@place)
-        # :server_url => liqpay_payment_place_url(@place)
-      )
-    end
+    @cinema = Cinema.find(id = @place.cinema_id)
+    @session = FilmSession.find(id = @place.film_session_id)
+    @searched_film_session_price = FilmSession.find(@place.film_session_id).price.to_i
+    @place_title = FilmSession.find(@place.film_session_id).session_name
+    check_payment_status
   end
 
   def new
@@ -75,6 +60,20 @@ class PlacesController < ApplicationController
   end
 
   private
+
+    def check_payment_status
+      if @place.status == false
+        @liqpay_request = Liqpay::Request.new(
+          :amount => @searched_film_session_price,
+          :currency => 'UAH',
+          :description => @place_title,
+          :order_id => @place.id,
+          :result_url => place_url(@place)
+          # :server_url => liqpay_payment_place_url(@place)
+        )
+      end
+    end
+
     def delete_old_places
       @film_sessions_places = FilmSession.all
       @film_sessions_places.each do |film_session_place|

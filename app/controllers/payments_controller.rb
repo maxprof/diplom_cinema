@@ -11,13 +11,20 @@ class PaymentsController < ApplicationController
       @place.data[attribute] = @liqpay_response.send(attribute)
     end
 
+    check_response_status
+    redirect_to @place
+  rescue Liqpay::InvalidResponse
+    render text: 'Payment error', status: 500
+  end
+
+  private
+
+  def check_response_status
     if @liqpay_response.success?
       @place.update_attributes!(:status => true)
     else
       @place.update_attributes!(:status => false)
     end
-    redirect_to @place
-  rescue Liqpay::InvalidResponse
-    render text: 'Payment error', status: 500
   end
+
 end

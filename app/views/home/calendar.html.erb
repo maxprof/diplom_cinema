@@ -10,15 +10,13 @@
     <% if @film_sessions %>
       <ul>
         <% @film_sessions.each do |film_session| %>
-          <% if film_session.session_start_date == date.to_s || ( film_session.session_start_date < date.to_s and date.to_s <= film_session.session_end_date ) %>
+          <% if inspect_film_session_date(date,film_session) %>
             <% if date.to_s > Date.today.to_s %>
               <li>
                   <p><i class="fa fa-film" aria-hidden="true"></i> <%= film_session.session_name %></p>
                   <ul>
                     <% film_session.film_session_session_times.each do |time| %>
-                      <% @time_id = time.session_time_id %>
-                      <% session_time = SessionTime.find(id = @time_id).session_time  %>
-                      <li><i class="fa fa-clock-o" aria-hidden="true"></i> <%= link_to session_time, film_session_path(:session_time=>session_time,:day=>date, :id=>film_session.id) %></li>
+                      <li><i class="fa fa-clock-o" aria-hidden="true"></i> <%= link_to find_session_time(time), film_session_path(:session_time=>find_session_time(time),:day=>date, :id=>film_session.id) %></li>
                     <% end %>
                   </ul>
               </li>

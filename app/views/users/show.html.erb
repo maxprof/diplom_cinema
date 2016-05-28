@@ -63,14 +63,11 @@
         <tr>
           <td><%= place.place_number %></td>
           <td><%= place.cinema.cinema_name %></td>
-          <% p = place.film_session_id %>
-          <% f = FilmSession.find(id = p) %>
-          <td><%= f.session_name %></td>
+          <td><%= find_session_name_for_user_place(place) %></td>
           <td><%= place.place_number %></td>
           <td><%= place.session_date %></td>
           <td><%= place.session_time %></td>
           <td><%= place.status %></td>
-
         </tr>
       <% end %>
     </tbody>

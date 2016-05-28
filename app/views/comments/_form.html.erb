@@ -17,7 +17,7 @@
                <%= f.text_area :body, class:"form-control" %>
             </div>
           </div>
-          <%= f.hidden_field :commentable_id, :value => @film_session_id %>
+          <%= f.hidden_field :commentable_id, :value => film_session_id %>
           <%= f.hidden_field :commentable_type, :value => "FilmSession" %>
 
           <div class="form-group">
@@ -32,6 +32,7 @@
         </div>
       </div>
     </div>
+
 
 
 
