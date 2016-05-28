@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:id])#.includes(:cinema)
   end
 
   def edit
@@ -22,3 +22,4 @@ class UsersController < ApplicationController
        params.require(:user).permit(:avatar, :login)
     end
 end
+

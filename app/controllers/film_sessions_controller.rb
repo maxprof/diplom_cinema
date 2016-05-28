@@ -1,7 +1,7 @@
 class FilmSessionsController < ApplicationController
   before_action :delete_old_places, only: [:show]
   before_action :check_booking_time, only: [:show]
-  before_action :set_film_session, only: [:show, :edit, :update, :destroy, :getBookingPlaces]
+  before_action :set_film_session, only: [ :show, :edit, :update, :destroy, :getBookingPlaces]
   before_action :check_if_admin, only: [:new, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new]
 
@@ -11,10 +11,12 @@ class FilmSessionsController < ApplicationController
     else
       @film_sessions = FilmSession.search(params[:search])
     end
+      @film_sessions = @film_sessions.includes(:places)
       @film_sessions = @film_sessions.includes(:categories)
   end
 
   def show
+
     #create params for comments
     session[:id] = @film_session.id
     session[:type] = "FilmSession"
@@ -55,8 +57,7 @@ class FilmSessionsController < ApplicationController
   end
 
   def create
-    @film_session = FilmSession.new(film_session_params)
-    @film_session.user_id = current_user.id
+    @film_session = current_user.film_sessions.build(film_session_params)
 
     if @film_session.save
       flash[:success] = "New film session was successufly created"

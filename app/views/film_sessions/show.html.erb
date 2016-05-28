@@ -67,7 +67,7 @@
 						<div id="data_<%= n %>" class="<%= n %>">
 
 							<%= form_for Place.new do |f| %>
-								<%= render partial: "shared/place", locals: {f: f, n: n} %>
+								<%= render partial: "shared/place", locals: {f: f, n: n, film_session: @film_session} %>
 							  <div class="actions">
 							    <%= f.submit "Booking", :class => "btn btn-raised btn-primary" %>
 							  </div>

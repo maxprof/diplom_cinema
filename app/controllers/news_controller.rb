@@ -26,8 +26,7 @@ class NewsController < ApplicationController
   # POST /news
   # POST /news.json
   def create
-    @news = News.new(news_params)
-    @news.user_id = current_user.id
+    @news = current_user.news.build(news_params)
 
     if @news.save
       flash[:success] = "New fnews was successufly created"

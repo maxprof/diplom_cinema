@@ -48,6 +48,9 @@ GEM
     bootstrap-will_paginate (0.0.10)
       will_paginate
     builder (3.2.2)
+    bullet (5.1.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.10.0)
     byebug (8.2.5)
     capybara (2.7.1)
       addressable
@@ -64,6 +67,8 @@ GEM
       activesupport (>= 3.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
+    code_analyzer (0.4.5)
+      sexp_processor
     coderay (1.1.1)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
@@ -229,6 +234,14 @@ GEM
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
+    rails_best_practices (1.16.0)
+      activesupport
+      code_analyzer (>= 0.4.3)
+      erubis
+      i18n
+      json
+      require_all
+      ruby-progressbar
     rails_serve_static_assets (0.0.5)
     rails_stdout_logging (0.0.5)
     railties (4.2.4)
@@ -242,6 +255,7 @@ GEM
     ref (2.0.0)
     regexp_parser (0.3.3)
     request_store (1.3.1)
+    require_all (1.3.3)
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
     rspec-core (3.4.4)
@@ -261,6 +275,7 @@ GEM
       rspec-mocks (~> 3.4.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    ruby-progressbar (1.7.5)
     sass (3.4.22)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -271,6 +286,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    sexp_processor (4.6.1)
     slop (3.6.0)
     spring (1.7.1)
     sprockets (3.6.0)
@@ -300,6 +316,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
+    uniform_notifier (1.10.0)
     warden (1.2.6)
       rack (>= 1.0)
     web-console (3.1.1)
@@ -317,6 +334,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-will_paginate
+  bullet
   byebug
   capybara
   client_side_validations
@@ -345,6 +363,7 @@ DEPENDENCIES
   rack-mini-profiler
   rails (= 4.2.4)
   rails_12factor
+  rails_best_practices
   rake (~> 11.1.2)
   rspec-rails
   sass (~> 3.4, >= 3.4.22)

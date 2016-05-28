@@ -4,7 +4,7 @@ class FilmSession < ActiveRecord::Base
   has_many :film_session_session_times
   has_many :session_times, through: :film_session_session_times
   has_many :film_session_categories
-  has_many :categories, through: :film_session_categories
+  has_many :categories, through: :film_session_categories, :counter_cache => true
 	has_many :places, :dependent => :destroy
   belongs_to :user
   validates :user_id, presence: true

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160526203657) do
+ActiveRecord::Schema.define(version: 20160528154801) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20160526203657) do
     t.integer  "user_id"
   end
 
+  add_index "cinemas", ["user_id"], name: "index_cinemas_on_user_id"
+
   create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.integer  "user_id"
@@ -36,15 +38,25 @@ ActiveRecord::Schema.define(version: 20160526203657) do
     t.datetime "updated_at",       null: false
   end
 
+  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id"
+  add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+
   create_table "film_session_categories", force: :cascade do |t|
     t.integer "film_session_id"
     t.integer "category_id"
   end
 
+  add_index "film_session_categories", ["category_id"], name: "index_film_session_categories_on_category_id"
+  add_index "film_session_categories", ["film_session_id"], name: "index_film_session_categories_on_film_session_id"
+
   create_table "film_session_session_times", force: :cascade do |t|
     t.integer "film_session_id"
     t.integer "session_time_id"
   end
+
+  add_index "film_session_session_times", ["film_session_id"], name: "index_film_session_session_times_on_film_session_id"
+  add_index "film_session_session_times", ["session_time_id"], name: "index_film_session_session_times_on_session_time_id"
 
   create_table "film_sessions", force: :cascade do |t|
     t.integer  "cinema_id"
@@ -64,6 +76,9 @@ ActiveRecord::Schema.define(version: 20160526203657) do
     t.decimal  "price",                             precision: 8, scale: 2
     t.string   "session_end_date"
   end
+
+  add_index "film_sessions", ["cinema_id"], name: "index_film_sessions_on_cinema_id"
+  add_index "film_sessions", ["user_id"], name: "index_film_sessions_on_user_id"
 
   create_table "film_sessions_places", id: false, force: :cascade do |t|
     t.integer "film_session_id"
@@ -85,6 +100,8 @@ ActiveRecord::Schema.define(version: 20160526203657) do
     t.datetime "news_poster_updated_at"
   end
 
+  add_index "news", ["user_id"], name: "index_news_on_user_id"
+
   create_table "places", force: :cascade do |t|
     t.integer  "cinema_id"
     t.integer  "film_session_id"
@@ -98,9 +115,20 @@ ActiveRecord::Schema.define(version: 20160526203657) do
     t.string   "session_date"
   end
 
+  add_index "places", ["cinema_id"], name: "index_places_on_cinema_id"
+  add_index "places", ["film_session_id"], name: "index_places_on_film_session_id"
+  add_index "places", ["user_id"], name: "index_places_on_user_id"
+
+  create_table "search_categories", force: :cascade do |t|
+    t.integer "search_id"
+    t.integer "category_id"
+  end
+
+  add_index "search_categories", ["category_id"], name: "index_search_categories_on_category_id"
+  add_index "search_categories", ["search_id"], name: "index_search_categories_on_search_id"
+
   create_table "searches", force: :cascade do |t|
     t.string   "keywords"
-    t.string   "category"
     t.decimal  "max_price"
     t.float    "rating"
     t.datetime "created_at", null: false

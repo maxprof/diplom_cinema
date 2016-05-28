@@ -1,21 +1,22 @@
 
-  <%= f.hidden_field :cinema_id, :value => @film_session.cinema_id %>
-  <%= f.hidden_field :film_session_id, :value => @film_session.id %>
+  <%= f.hidden_field :cinema_id, :value => film_session.cinema_id %>
+  <%= f.hidden_field :film_session_id, :value => film_session.id %>
   <%= f.hidden_field :place_number, :value => n %>
-  <%= f.hidden_field :session_start_date, :value => @film_session.session_start_date %>
+  <%= f.hidden_field :session_start_date, :value => film_session.session_start_date %>
   <%= f.hidden_field :session_time, :value => @session_time %>
   <%= f.hidden_field :session_date, :value => @session_day %>
 
   <div class="field">
     <%= f.label :session_name %><br>
-    <p><%= @film_session.session_name %></p>
+    <p><%= film_session.session_name %></p>
   </div>
   <div class="field">
     <%= f.label :session_start_date %><br>
-    <p><%= @film_session.session_start_date %></p>
+    <p><%= film_session.session_start_date %></p>
   </div>
   <div class="field">
     <%= f.label :place_number %><br>
     <p><%= n %></p>
   </div>
   <br/>
+

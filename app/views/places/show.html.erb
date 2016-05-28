@@ -2,16 +2,12 @@
 
 <p>
   <strong>Cinema:</strong>
-  <% cinema_id = @place.cinema_id %>
-  <% cinema = Cinema.find(id = cinema_id) %>
-  <%= cinema.cinema_name %>
+  <%= @cinema.cinema_name %>
 </p>
 
 <p>
   <strong>Filmsession:</strong>
-  <% session_id = @place.film_session_id %>
-  <% session = FilmSession.find(id = session_id) %>
-  <%= session.session_name %>
+  <%= @session.session_name %>
 </p>
 
 <p>

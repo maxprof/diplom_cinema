@@ -11,6 +11,10 @@ class PlacesController < ApplicationController
   end
 
   def show
+    cinema_id = @place.cinema_id
+    @cinema = Cinema.find(id = cinema_id)
+    session_id = @place.film_session_id
+    @session = FilmSession.find(id = session_id)
     @film_session_id = @place.film_session_id
     @searched_film_session = FilmSession.find(@film_session_id)
     @searched_film_session_price = @searched_film_session.price.to_i
@@ -40,8 +44,7 @@ class PlacesController < ApplicationController
   end
 
   def create
-    @place = Place.new(place_params)
-    @place.user_id = current_user.id
+    @place = current_user.places.build(place_params)
     @place.status = false
 
 

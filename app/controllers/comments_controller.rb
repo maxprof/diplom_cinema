@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
 
   def new
-    # @film_session_id =
     @comment = Comment.new
   end
 

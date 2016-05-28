@@ -17,6 +17,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
   gem 'traceroute'
+  gem 'rails_best_practices'
 end
 
 group :test do
@@ -31,6 +32,7 @@ end
 
 group :development do
   gem 'web-console', '~> 3.0'
+  gem 'bullet'
 end
 
 group :production do
