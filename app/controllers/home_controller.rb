@@ -7,6 +7,7 @@ class HomeController < ApplicationController
 
   def calendar
     @film_sessions = FilmSession.all
+    @film_sessions = @film_sessions.includes(:film_session_session_times)
     @date = params[:session_start_date] ? Date.parse(params[:session_start_date]) : Date.today
   end
 

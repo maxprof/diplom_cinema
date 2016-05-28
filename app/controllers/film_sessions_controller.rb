@@ -10,6 +10,7 @@ class FilmSessionsController < ApplicationController
     else
       @film_sessions = FilmSession.search(params[:search])
     end
+      @film_sessions = @film_sessions.includes(:categories)
   end
 
   def show
@@ -17,47 +18,35 @@ class FilmSessionsController < ApplicationController
     session[:id] = @film_session.id
     session[:type] = "FilmSession"
     #Get params from calendar
-
     @session_time = params[:session_time]
     @session_day = params[:day]
-
     # get list of session times for this FilmSession
-
     @list_of_session_times = @film_session.session_times.where(session_time: @session_time)
-
     if @list_of_session_times.empty?
       @times_presence = false
     else
       @times_presence = true
     end
-
     # Check if FelmSession with this parameters presence
-
     if !@times_presence || @session_time == nil || @session_day == nil || @session_day  < Date.today.to_s || @session_day > @film_session.session_end_date
        flash[:danger] = "Sessions with such parameters do not exist"
        return redirect_to calendar_url
      else
     end
-
     # Get comments
-
     @comments = Comment.where(commentable_id: @film_session.id).order(created_at: :desc).paginate(page: params[:page], per_page: 5)
-
     # functional for places array
-
     @t = Time.now
     @booked_places = @film_session.places
     @test = getBookingPlaces
     @array_of_places = params[:data_value] || []
     @place = Place.new
-
     if @array_of_places.length > 1
       @array_for_save = []
       @array_of_places.length.times do |save_record|
         @array_for_save << Place.new
       end
     end
-
     @array_length = params[:array_length]
     if @array_of_places != []
       render "form_for_places"
