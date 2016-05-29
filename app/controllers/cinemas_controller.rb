@@ -17,7 +17,7 @@ class CinemasController < ApplicationController
   end
 
   def create
-    @cinema = .current_user.cinemas.build(cinema_params)
+    @cinema = current_user.cinemas.build(cinema_params)
     if @cinema.save
       flash[:success] = "New cinema was successufly created"
       redirect_to cinema_path(@cinema)
