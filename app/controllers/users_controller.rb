@@ -2,10 +2,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])#.includes(:cinema)
+    check_booking_time
   end
 
   def edit
     @user = User.find(params[:id])
+    check_booking_time
   end
 
   def update
@@ -13,9 +15,8 @@ class UsersController < ApplicationController
     if @user.update_attributes(user_params)
       flash[:success] = "User profile was successufly updated"
       redirect_to user_path(@user)
-    else
-
     end
+    check_booking_time
   end
 
   private
@@ -23,4 +24,5 @@ class UsersController < ApplicationController
        params.require(:user).permit(:avatar, :login)
     end
 end
+
 

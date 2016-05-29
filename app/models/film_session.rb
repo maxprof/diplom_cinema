@@ -19,6 +19,7 @@ class FilmSession < ActiveRecord::Base
   has_attached_file :film_sessions_poster, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :film_sessions_poster, content_type: /\Aimage\/.*\Z/
 
+  delegate :cinema_name, :to => :cinema, :prefix => true
 
   def self.search(search)
     if search

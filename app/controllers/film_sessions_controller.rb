@@ -1,6 +1,5 @@
-class FilmSessionsController < ApplicationController
+ class FilmSessionsController < ApplicationController
   before_action :delete_old_places, only: [:show]
-  before_action :check_booking_time, only: [:show]
   before_action :set_film_session, only: [ :show, :edit, :update, :destroy, :getBookingPlaces]
   before_action :check_if_admin, only: [:new, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new]
@@ -24,6 +23,7 @@ class FilmSessionsController < ApplicationController
     check_session_params
     get_comments
     places_functional
+    check_booking_time
   end
 
   def new
@@ -124,18 +124,6 @@ class FilmSessionsController < ApplicationController
       @film_session = FilmSession.where(id: params[:id]).limit(1).first
       if !@film_session.present?
         redirect_to '/errors/not_found'
-      end
-    end
-
-    def check_booking_time
-      @places = Place.all
-      @places.each do |place_booked_time|
-        if place_booked_time.status == false
-          @test_time = Time.now.to_s.to_time - place_booked_time.created_at.to_s.to_time
-          if @test_time.to_i > 3.hours.to_i
-            place_booked_time.destroy
-          end
-        end
       end
     end
 

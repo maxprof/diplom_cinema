@@ -34,7 +34,7 @@
             </span>
             <div class="form-group">
               <div class="col-md-offset-5">
-                 <%= form.submit "Update user avatar", class:"btn btn-raised btn-danger m20" %>
+                 <%= form.submit "Update user profile", class:"btn btn-raised btn-danger m20" %>
               </div>
             </div>
           </div>
@@ -62,7 +62,7 @@
       <% @user.places.each do |place| %>
         <tr>
           <td><%= place.place_number %></td>
-          <td><%= place.cinema.cinema_name %></td>
+          <td><%= place.cinema_cinema_name %></td>
           <td><%= find_session_name_for_user_place(place) %></td>
           <td><%= place.place_number %></td>
           <td><%= place.session_date %></td>
