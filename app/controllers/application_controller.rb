@@ -11,7 +11,10 @@ class ApplicationController < ActionController::Base
     @places.each do |place_booked_time|
       if place_booked_time.status == false
         @test_time = Time.now.to_s.to_time - place_booked_time.created_at.to_s.to_time
-        if @test_time.to_i > 3.hours.to_i
+        puts @test_time
+        puts 3.hours.to_f
+
+        if @test_time.to_i < 3.hours.to_i
           place_booked_time.destroy
         end
       end
@@ -20,3 +23,4 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 end
+

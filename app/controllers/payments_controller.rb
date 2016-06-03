@@ -23,6 +23,7 @@ class PaymentsController < ApplicationController
   def check_response_status
     if @liqpay_response.success? && @liqpay_reponse.amount == @Place.price
       @place.update_attributes!(:status => true)
+      PlaceBookingMailer.booking_email(current_user).deliver
     else
       @place.update_attributes!(:status => false)
     end
