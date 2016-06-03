@@ -1,4 +1,3 @@
-
   <%= f.hidden_field :cinema_id, :value => film_session.cinema_id %>
   <%= f.hidden_field :film_session_id, :value => film_session.id %>
   <%= f.hidden_field :place_number, :value => n %>
@@ -6,18 +5,42 @@
   <%= f.hidden_field :session_time, :value => @session_time %>
   <%= f.hidden_field :session_date, :value => @session_day %>
 
+<div class="col-md-6">
   <div class="field">
     <%= f.label :session_name %><br>
     <p><%= film_session.session_name %></p>
   </div>
+
+  <div class="field">
+    <%= f.label "Cinema name" %><br>
+    <p><%= film_session.cinema_cinema_name %></p>
+  </div>
+
   <div class="field">
     <%= f.label :session_start_date %><br>
-    <p><%= film_session.session_start_date %></p>
+    <p><%= @session_day %></p>
   </div>
+</div>
+
+<div class="col-md-6">
+  <div class="field">
+    <%= f.label :session_start_date %><br>
+    <p><%= @session_time   %></p>
+  </div>
+
+  <div class="field">
+    <%= f.label :price %><br>
+    <p><%= film_session.price.to_i  %> UAH </p>
+  </div>
+
+
   <div class="field">
     <%= f.label :place_number %><br>
-    <p><%= n %></p>
+    <p>№ <%= n %></p>
   </div>
-  <br/>
+</div>
+
+
+<div class="clearfix"></div>
 
 

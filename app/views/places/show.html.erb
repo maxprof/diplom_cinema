@@ -1,47 +1,49 @@
-<p id="notice"><%= notice %></p>
+<div class="well bs-component">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Cinema:</strong>
-  <%= @cinema.cinema_name %>
-</p>
+  <p>
+    <strong>Cinema:</strong>
+    <%= @cinema.cinema_name %>
+  </p>
 
-<p>
-  <strong>Filmsession:</strong>
-  <%= @session.session_name %>
-</p>
+  <p>
+    <strong>Filmsession:</strong>
+    <%= @session.session_name %>
+  </p>
 
-<p>
-  <strong>Place number:</strong>
-  <%= @place.place_number %>
-</p>
+  <p>
+    <strong>Place number:</strong>
+    <%= @place.place_number %>
+  </p>
 
-<p>
-  <strong>Place date:</strong>
-  <%= @place.session_start_date %>
-</p>
-<p>
-  <strong>Session time:</strong>
-  <%= @place.session_time %>
-</p>
+  <p>
+    <strong>Place date:</strong>
+    <%= @place.session_date %>
+  </p>
+  <p>
+    <strong>Session time:</strong>
+    <%= @place.session_time %>
+  </p>
 
-<p>
-  <strong>Payment status:</strong>
-  <%= @place.status %>
-</p>
+  <p>
+    <strong>Payment status:</strong>
+    <%= @place.status %>
+  </p>
 
-<p>
-  <strong>Price:</strong>
-  <%= @searched_film_session_price %> UAH
-</p>
+  <p>
+    <strong>Price:</strong>
+    <%= @searched_film_session_price %> UAH
+  </p>
 
-<% if @place.status == false %>
-  <p>If you have paid already, the response didn't come in yet from LiqPAY. Refresh this page later.</p>
-  <%=liqpay_button @liqpay_request %>
-<% elsif @place.status == true %>
-  <p>Payment succeeded.</p>
-<% else %>
-  <p>Payment failed.</p>
-<% end %>
+  <% if @place.status == false %>
+    <p>If you have paid already, the response didn't come in yet from LiqPAY. Refresh this page later.</p>
+    <%=liqpay_button @liqpay_request %>
+  <% elsif @place.status == true %>
+    <p>Payment succeeded.</p>
+  <% else %>
+    <p>Payment failed.</p>
+  <% end %>
 
-<%= link_to 'Edit', edit_place_path(@place) %> |
-<%= link_to 'Back', places_path %>
+  <%= link_to 'Edit', edit_place_path(@place) %> |
+  <%= link_to 'Back', places_path %>
+</div>

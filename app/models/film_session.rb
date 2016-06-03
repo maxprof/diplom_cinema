@@ -21,6 +21,8 @@ class FilmSession < ActiveRecord::Base
 
   delegate :cinema_name, :to => :cinema, :prefix => true
 
+
+
   def self.search(search)
     if search
       where(["session_name LIKE ?","%#{search}%"])

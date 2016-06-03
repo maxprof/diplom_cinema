@@ -12,6 +12,7 @@ class PaymentsController < ApplicationController
     end
 
     check_response_status
+
     redirect_to @place
   rescue Liqpay::InvalidResponse
     render text: 'Payment error', status: 500
@@ -20,11 +21,11 @@ class PaymentsController < ApplicationController
   private
 
   def check_response_status
-    if @liqpay_response.success?
+    if @liqpay_response.success? && @liqpay_reponse.amount == @Place.price
       @place.update_attributes!(:status => true)
     else
       @place.update_attributes!(:status => false)
     end
   end
-
 end
+

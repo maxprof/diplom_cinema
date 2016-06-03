@@ -10,8 +10,8 @@ class PlacesController < ApplicationController
   end
 
   def show
-    @cinema = Cinema.find(id = @place.cinema_id)
-    @session = FilmSession.find(id = @place.film_session_id)
+    @cinema = Cinema.find(@place.cinema_id)
+    @session = FilmSession.find(@place.film_session_id)
     @searched_film_session_price = FilmSession.find(@place.film_session_id).price.to_i
     @place_title = FilmSession.find(@place.film_session_id).session_name
     check_payment_status
@@ -66,8 +66,9 @@ class PlacesController < ApplicationController
         @liqpay_request = Liqpay::Request.new(
           :amount => @searched_film_session_price,
           :currency => 'UAH',
-          :description => @place_title,
+          :description => "#{@place_title}, Place number: #{@place.place_number}, date: #{@place.session_date}, time: #{@place.session_time}",
           :order_id => @place.id,
+          :sandbox => 1,
           :result_url => place_url(@place)
           # :server_url => liqpay_payment_place_url(@place)
         )
