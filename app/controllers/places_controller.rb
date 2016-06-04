@@ -68,9 +68,9 @@ class PlacesController < ApplicationController
           :currency => 'UAH',
           :description => "#{@place_title}, Place number: #{@place.place_number}, date: #{@place.session_date}, time: #{@place.session_time}",
           :order_id => @place.id,
-          :sandbox => 1,
-          :result_url => place_url(@place)
-          # :server_url => liqpay_payment_place_url(@place)
+          :sandbox => '1',
+          result_url: place_url(@place),
+          server_url: liqpay_payment_url
         )
       end
     end

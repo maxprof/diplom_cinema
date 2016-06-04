@@ -14,6 +14,6 @@ Rails.application.routes.draw do
   get 'users/:id' => 'users#show', :as => :user
   resources :users, except: [:show]
   root 'home#index'
-  post '/liqpay_payment' => 'payments#liqpay_payment'
+  get '/liqpay_payment' => 'payments#liqpay_payment'
   get '*path' => redirect('/errors/not_found')
 end

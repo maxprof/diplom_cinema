@@ -4,6 +4,9 @@ class PaymentsController < ApplicationController
   def liqpay_payment
     @liqpay_response = Liqpay::Response.new(params)
     @place = Place.find(@liqpay_response.order_id)
+    puts "-------------------------------------------------------------------------------------"
+    puts "----------------------------------------"
+    puts @place
 
     @place.data = {}
 
@@ -29,4 +32,3 @@ class PaymentsController < ApplicationController
     end
   end
 end
-
