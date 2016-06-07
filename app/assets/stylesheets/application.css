@@ -83,3 +83,16 @@ img.not_found{
 .actions {
     text-align: center;
 }
+input#search {
+    margin-top: 5px;
+}
+.form-control, .form-group .form-control {
+    border-bottom: 1px solid #009688!important;
+}
+.form-group {
+    padding-bottom: 7px;
+    margin: 0px 0 0 0!important;
+}
+.form-group.search_margin.is-empty {
+    margin-top: 15px!important;
+}

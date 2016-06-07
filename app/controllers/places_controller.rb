@@ -64,7 +64,7 @@ class PlacesController < ApplicationController
     def check_payment_status
       if @place.status == false
         @liqpay_request = Liqpay::Request.new(
-          :amount => @searched_film_session_price,
+          :amount => 0.1 ,
           :currency => 'UAH',
           :description => "#{@place_title}, Place number: #{@place.place_number}, date: #{@place.session_date}, time: #{@place.session_time}",
           :order_id => @place.id,

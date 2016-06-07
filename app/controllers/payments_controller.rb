@@ -4,9 +4,6 @@ class PaymentsController < ApplicationController
   def liqpay_payment
     @liqpay_response = Liqpay::Response.new(params)
     @place = Place.find(@liqpay_response.order_id)
-    puts "-------------------------------------------------------------------------------------"
-    puts "----------------------------------------"
-    puts @place
 
     @place.data = {}
 
@@ -14,21 +11,13 @@ class PaymentsController < ApplicationController
       @place.data[attribute] = @liqpay_response.send(attribute)
     end
 
-    check_response_status
-
+    if @liqpay_response.success?
+      @place.update_attributes!(:status => 'success')
+    else
+      @place.update_attributes!(:status => 'failed')
+    end
     redirect_to @place
   rescue Liqpay::InvalidResponse
     render text: 'Payment error', status: 500
-  end
-
-  private
-
-  def check_response_status
-    if @liqpay_response.success? && @liqpay_reponse.amount == @Place.price
-      @place.update_attributes!(:status => true)
-      PlaceBookingMailer.booking_email(current_user).deliver
-    else
-      @place.update_attributes!(:status => false)
-    end
   end
 end
