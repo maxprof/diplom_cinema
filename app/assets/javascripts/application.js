@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require rails.validations
 //= require fancybox
+//= require_tree .
 
 
 $(document).ready(function() {

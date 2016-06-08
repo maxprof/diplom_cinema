@@ -81,9 +81,6 @@ class PlacesController < ApplicationController
         film_session_place.places.each do |place|
           if Date.today.to_s > place.session_date
             place.delete
-            puts "------------"
-            puts place.session_date
-            puts "------------"
           end
         end
       end
