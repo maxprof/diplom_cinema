@@ -1,11 +1,10 @@
 class ApplicationController < ActionController::Base
   helper_method :find_session_name_for_user_place
   helper_method :check_booking_time
-  before_filter :controller_and_action_name
+  before_filter :controller_name
 
-  def controller_and_action_name
+  def controller_name
     @controller = controller_name
-    @action = action_name
   end
 
   def find_session_name_for_user_place(place)
