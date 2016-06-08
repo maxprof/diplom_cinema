@@ -1,146 +1,150 @@
-<p id="notice"><%= notice %></p>
-<%= image_tag @film_session.film_sessions_poster.url(:medium) %>
+<div class="well bs-component">
+	<p id="notice"><%= notice %></p>
+	<%= image_tag @film_session.film_sessions_poster.url(:medium) %>
 
-<h1>Session time: <%= @session_time %></h1> <br />
-<h1>Session day: <%= @session_day%></h1>
+	<h1>Session time: <%= @session_time %></h1> <br />
+	<h1>Session day: <%= @session_day%></h1>
 
-	<p>
-	  <strong>Cinema:</strong>
-	  <%= @film_session.cinema_cinema_name %>
-	</p>
-
-	<p>
-	  <strong>Session name:</strong>
-	  <%= @film_session.session_name %>
-	</p>
-
-	<p>
-	  <strong>Price:</strong>
-	  <%= number_to_currency(@film_session.price, :unit => "UAH ")  %>
-	</p>
-
-	<p>
-	  <strong>Number of session place:</strong>
-	  <%= @film_session.number_of_session_place %>
-	</p>
 		<p>
-	 <strong>Rating:</strong>
-	  <%= @film_session.rating %>
-	</p>
+		  <strong>Cinema:</strong>
+		  <%= @film_session.cinema_cinema_name %>
+		</p>
+
 		<p>
-	  <strong>Description:</strong>
-	  <%= @film_session.description %>
-	</p>
-	<br>
-	<p>
-	  <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @film_session.trailer_link %>" frameborder="0" allowfullscreen></iframe> -->
-	</p>
-	<% if @film_session.categories.any? %>
-		<p>Categories: <%= render @film_session.categories %></p>
-	<% end %>
-	<br>
-	<% n = 0 %>
-	<div class="places_block">
-	<div class="test_hide hide">
-		<a href="#data2" class="btn btn-raised btn-info group2" id="main-booking-btn group2" >Забронировать</a> <br />
-	</div>
-		<% @film_session.number_of_session_place.times do |session| %>
-			 <% n = n + 1 %>
-			 <% if @test.index(n) != nil %>
-			 	<div class="btn btn-danger btn-raised place_block" id="place_<%= n %>">
-					<p class="place_number">Місце № <%= n %></p>
-					<div class="hidden-block hide">
-						<p>Booked!</p>
-					</div>
-			 	</div>
-			 <% else %>
+		  <strong>Session name:</strong>
+		  <%= @film_session.session_name %>
+		</p>
 
+		<p>
+		  <strong>Price:</strong>
+		  <%= number_to_currency(@film_session.price, :unit => "UAH ")  %>
+		</p>
 
-			 	<div class="btn btn-info btn-raised place_block" id="place_<%= n %>" style="">
-					<p class="place_number">Place № <%= n %></p>
-					<% if user_signed_in? %>
-					<div class="hidden-block">
-						<a id="group" href="#data_<%= n %>">Booking</a>
-					</div>
-					<% end %>
-					<div class="hidden">
-						<div id="data_<%= n %>" class="<%= n %>">
-
-							<%= form_for Place.new do |f| %>
-								<%= render partial: "shared/place", locals: {f: f, n: n, film_session: @film_session} %>
-							  <div class="actions">
-							    <%= f.submit "Booking", :class => "btn btn-raised btn-primary" %>
-							  </div>
-							<% end %>
-						</div>
-					</div>
-			 	</div>
-			 <%end%>
+		<p>
+		  <strong>Number of session place:</strong>
+		  <%= @film_session.number_of_session_place %>
+		</p>
+			<p>
+		 <strong>Rating:</strong>
+		  <%= @film_session.rating %>
+		</p>
+			<p>
+		  <strong>Description:</strong>
+		  <%= @film_session.description %>
+		</p>
+		<br>
+		<p>
+		  <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @film_session.trailer_link %>" frameborder="0" allowfullscreen></iframe> -->
+		</p>
+		<% if @film_session.categories.any? %>
+			<p>Categories: <%= render @film_session.categories %></p>
 		<% end %>
-		<div class="hidden">
-			<div id="data2">
-				<% if @array_of_places.present? %>
-					<% @array_of_places.each do %>
-						<%= @array_of_places %>
+		<br>
+		<% n = 0 %>
+		<div class="places_block">
+		<div class="test_hide hide">
+			<a href="#data2" class="btn btn-raised btn-info group2" id="main-booking-btn group2" >Забронировать</a> <br />
+		</div>
+			<% @film_session.number_of_session_place.times do |session| %>
+				 <% n = n + 1 %>
+				 <% if @test.index(n) != nil %>
+				 	<div class="btn btn-danger btn-raised place_block" id="place_<%= n %>">
+						<p class="place_number">Місце № <%= n %></p>
+						<div class="hidden-block hide">
+							<p>Booked!</p>
+						</div>
+				 	</div>
+				 <% else %>
+
+
+				 	<div class="btn btn-info btn-raised place_block" id="place_<%= n %>" style="">
+						<p class="place_number">Place № <%= n %></p>
+						<% if user_signed_in? %>
+						<div class="hidden-block">
+							<a id="group" href="#data_<%= n %>">Booking</a>
+						</div>
+						<% end %>
+						<div class="hidden">
+							<div id="data_<%= n %>" class="<%= n %>">
+
+								<%= form_for Place.new do |f| %>
+									<%= render partial: "shared/place", locals: {f: f, n: n, film_session: @film_session} %>
+								  <div class="actions">
+								    <%= f.submit "Booking", :class => "btn btn-raised btn-primary" %>
+								  </div>
+								<% end %>
+							</div>
+						</div>
+				 	</div>
+				 <%end%>
+			<% end %>
+			<div class="hidden">
+				<div id="data2">
+					<% if @array_of_places.present? %>
+						<% @array_of_places.each do %>
+							<%= @array_of_places %>
+						<% end %>
 					<% end %>
+				</div>
+			</div>
+		</div>
+</div>
+		<div class="container">
+			<div class="row">
+				<% @comments.each do |comment| %>
+					<div class="well bs-component comments">
+						<div class="col-md-1">
+	    				<%= image_tag find_user_comment_id(comment).avatar.url, class:"img-responsive" %>
+	    				<br>
+							<span><%= comment.created_at.to_date %></span>
+						</div>
+						<p><%= comment.body %></p>
+						<div class="clearfix"></div>
+					</div>
 				<% end %>
 			</div>
 		</div>
+
+
+<div class="clearfix"></div>
+
+	<div align="center">
+		<%= will_paginate @comments %>
 	</div>
-
-
-	<div class="container">
-		<div class="row">
-			<% @comments.each do |comment| %>
-				<div class="well bs-component comments">
-					<div class="col-md-1">
-    				<%= image_tag find_user_comment_id(comment).avatar.url, class:"img-responsive" %>
-    				<br>
-						<span><%= comment.created_at.to_date %></span>
-					</div>
-					<p><%= comment.body %></p>
-					<div class="clearfix"></div>
-				</div>
-			<% end %>
-		</div>
-	</div>
-
-<div align="center">
-	<%= will_paginate @comments %>
-</div>
-<% if user_signed_in? && current_user.login != nil %>
-	<div class="container">
-		<div class="row">
-				<div class="well bs-component comments">
-					<%= form_for Comment.new do |f| %>
-						<div class="col-md-2">
-      				<%= image_tag current_user.avatar.url, class:"img-responsive" %>
-							<p>Login: <%= current_user.login %></p>
+	<% if user_signed_in? && current_user.login != nil %>
+		<div class="container">
+			<div class="row">
+					<div class="well bs-component comments">
+						<%= form_for Comment.new do |f| %>
+							<div class="col-md-2">
+	      				<%= image_tag current_user.avatar.url, class:"img-responsive" %>
+								<p>Login: <%= current_user.login %></p>
+							</div>
+							<div class="form-group is-empty">
+							   <label class="col-md-2 control-label">Comment:</label>
+							   <div class="col-md-8">
+							     <%= f.text_area :body, class:"form-control" %>
+							  </div>
+							</div>
+							<%= f.hidden_field :commentable_id, :value => @film_session.id %>
+							<%= f.hidden_field :commentable_type, :value => "FilmSession" %>
+							<div class="form-group">
+							 <div class="col-md-10 col-md-offset-2">
+							   <%= link_to 'Back', film_sessions_path, class:"btn btn-raised btn-default" %>
+							   <%= f.submit class:"btn btn-raised btn-primary m20" %>
+							  </div>
+							</div>
+							<div class="clearfix"></div>
+						<% end %>
+						<div class="navi-btns">
 						</div>
-						<div class="form-group is-empty">
-						   <label class="col-md-2 control-label">Comment:</label>
-						   <div class="col-md-8">
-						     <%= f.text_area :body, class:"form-control" %>
-						  </div>
-						</div>
-						<%= f.hidden_field :commentable_id, :value => @film_session.id %>
-						<%= f.hidden_field :commentable_type, :value => "FilmSession" %>
-						<div class="form-group">
-						 <div class="col-md-10 col-md-offset-2">
-						   <%= link_to 'Back', film_sessions_path, class:"btn btn-raised btn-default" %>
-						   <%= f.submit class:"btn btn-raised btn-primary m20" %>
-						  </div>
-						</div>
-						<div class="clearfix"></div>
-					<% end %>
-					<div class="navi-btns">
 					</div>
 				</div>
 			</div>
+	<% else %>
+		<div class="well bs-component comments">
+				<h2 class="text-warning text-center">To leave a comment, you need to be logged in and choose login in profile </h2>
+			<div class="clearfix"></div>
 		</div>
-<% else %>
-	<div class="well bs-component comments">
-			<h2 class="text-warning text-center">To leave a comment, you need to be logged in and choose login in profile </h2>
-		<div class="clearfix"></div>
-	</div>
-<% end %>
+	<% end %>
+
