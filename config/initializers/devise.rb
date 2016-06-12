@@ -5,6 +5,7 @@ Devise.setup do |config|
   require 'devise/orm/active_record'
   config.case_insensitive_keys = [ :email ]
   config.strip_whitespace_keys = [ :email ]
+  config.secret_key = 'some1234keyq23' if Rails.env == 'production'
   config.skip_session_storage = [:http_auth]
   config.stretches = Rails.env.test? ? 1 : 10
   config.reconfirmable = true

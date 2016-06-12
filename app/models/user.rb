@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :news
   has_many :comments
   validates :email, presence: true, uniqueness: true
+  delegate :login, :to => :film_session, :prefix => true
 
 
   def self.from_omniauth(auth)

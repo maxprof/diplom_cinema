@@ -1,45 +1,32 @@
 <div class="well bs-component">
 	<p id="notice"><%= notice %></p>
-	<%= image_tag @film_session.film_sessions_poster.url(:medium) %>
+	<div class="well bs-component">
+	    <div class="row">
+	        <div class="col-md-4">
+	            <%= image_tag @film_session.film_sessions_poster.url, class:"img-responsive"  %>
+	        </div>
 
-	<h1>Session time: <%= @session_time %></h1> <br />
-	<h1>Session day: <%= @session_day%></h1>
-
-		<p>
-		  <strong>Cinema:</strong>
-		  <%= @film_session.cinema_cinema_name %>
-		</p>
-
-		<p>
-		  <strong>Session name:</strong>
-		  <%= @film_session.session_name %>
-		</p>
-
-		<p>
-		  <strong>Price:</strong>
-		  <%= number_to_currency(@film_session.price, :unit => "UAH ")  %>
-		</p>
-
-		<p>
-		  <strong>Number of session place:</strong>
-		  <%= @film_session.number_of_session_place %>
-		</p>
-			<p>
-		 <strong>Rating:</strong>
-		  <%= @film_session.rating %>
-		</p>
-			<p>
-		  <strong>Description:</strong>
-		  <%= @film_session.description %>
-		</p>
-		<br>
-		<p>
-		  <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @film_session.trailer_link %>" frameborder="0" allowfullscreen></iframe> -->
-		</p>
-		<% if @film_session.categories.any? %>
-			<p>Categories: <%= render @film_session.categories %></p>
-		<% end %>
-		<br>
+	        <div class="col-md-8">
+	            <h1><%= @film_session.session_name %></h1>
+	            <p>Release: <b> <%= @film_session.session_start_date %> </b></p>
+	            <p>Genre:
+	                <% @film_session.categories.each do |category| %>
+	                    <%= link_to category.name, category_path(category) %> |
+	                <% end %>
+	            </p>
+	            <p> Ranking: <b><%= @film_session.rating %></b></p>
+	            <p><%= @film_session.description %></p>
+	            <p>Session time: <%= @session_time %></p>
+							<p>Session day: <%= @session_day%></p>
+	        </div>
+	    </div>
+	</div>
+		<div class="clearfix"></div>
+	<div class="well bs-component">
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @film_session.trailer_link %>" frameborder="0" allowfullscreen></iframe>
+	</div>
+<div class="clearfix"></div>
+	</div>
 		<% n = 0 %>
 		<div class="places_block">
 		<div class="test_hide hide">
@@ -55,8 +42,6 @@
 						</div>
 				 	</div>
 				 <% else %>
-
-
 				 	<div class="btn btn-info btn-raised place_block" id="place_<%= n %>" style="">
 						<p class="place_number">Place № <%= n %></p>
 						<% if user_signed_in? %>
@@ -66,7 +51,6 @@
 						<% end %>
 						<div class="hidden">
 							<div id="data_<%= n %>" class="<%= n %>">
-
 								<%= form_for Place.new do |f| %>
 									<%= render partial: "shared/place", locals: {f: f, n: n, film_session: @film_session} %>
 								  <div class="actions">
@@ -89,25 +73,24 @@
 			</div>
 		</div>
 </div>
-		<div class="container">
-			<div class="row">
-				<% @comments.each do |comment| %>
-					<div class="well bs-component comments">
-						<div class="col-md-1">
-	    				<%= image_tag find_user_comment_id(comment).avatar.url, class:"img-responsive" %>
-	    				<br>
-							<span><%= comment.created_at.to_date %></span>
-						</div>
-						<p><%= comment.body %></p>
-						<div class="clearfix"></div>
-					</div>
-				<% end %>
+<div class="container">
+	<div class="row">
+		<% @comments.each do |comment| %>
+			<div class="well bs-component comments">
+				<div class="col-md-1">
+  				<%= image_tag find_user_comment_id(comment).avatar.url, class:"img-responsive" %>
+  				<br>
+					<span><%= comment.created_at.to_date %></span>
+					<br>
+					<span><%= comment.user.login %></span>
+				</div>
+				<p><%= comment.body %></p>
+				<div class="clearfix"></div>
 			</div>
-		</div>
-
-
+		<% end %>
+	</div>
+</div>
 <div class="clearfix"></div>
-
 	<div align="center">
 		<%= will_paginate @comments %>
 	</div>
