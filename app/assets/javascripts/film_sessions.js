@@ -46,7 +46,7 @@ $(document).ready(function() {
                         });
                     },
                     error: function() {
-                        alert("Ajax error!")
+                        // alert("Ajax error!")
                     }
                 });
             });
