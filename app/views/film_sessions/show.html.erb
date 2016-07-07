@@ -28,6 +28,11 @@
 	</div>
 <div class="clearfix"></div>
 	</div>
+	<% if !user_signed_in? %>
+		<h1 class="text-center">You should log in, for booking</h1>
+	<% end %>
+<div class="clearfix"></div>
+
 		<% n = 0 %>
 		<div class="places_block">
 		<div class="test_hide hide">
