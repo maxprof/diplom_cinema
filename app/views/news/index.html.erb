@@ -21,7 +21,7 @@
 <% end %>
 
 <br>
-
-<%= link_to 'New News', new_news_path, class: "btn btn-raised btn-primary"  %>
-
+<% if user_signed_in? and current_user.admin? %>
+  <%= link_to 'New News', new_news_path, class: "btn btn-raised btn-primary"  %>
+<% end %>
 

@@ -7,8 +7,10 @@
     <div class="col-md-9 col-sm-9 col-xs-12 ">
       <h3><%= @news.title %></h3>
       <p><%= @news.description %></p>
-      <%= link_to 'Edit', edit_news_path(@news), class:"btn btn-raised btn-warning" %>
-      <%= link_to 'Back', news_index_path, class:"btn btn-raised btn-danger" %>
+      <% if user_signed_in? and current_user.admin? %>
+        <%= link_to 'Edit', edit_news_path(@news), class:"btn btn-raised btn-warning" %>
+        <%= link_to 'Back', news_index_path, class:"btn btn-raised btn-danger" %>
+      <% end %>
     </div>
   </div>
 </div>

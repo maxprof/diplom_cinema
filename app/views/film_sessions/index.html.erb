@@ -37,8 +37,8 @@
 </table>
 
 <br>
-
+<% if user_signed_in? and current_user.admin? %>
 <%= link_to 'New Film session', new_film_session_path,class: "btn btn-primary btn-lg"  %>
-
+<% end %>
 
 
