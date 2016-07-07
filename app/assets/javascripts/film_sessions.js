@@ -8,7 +8,7 @@ $(document).ready(function() {
 
             $arr = [];
             $array_length += 1 ;
-            $link_id = $(location).attr('href').slice(36);
+            $link_id = $(location).attr('href').slice(54);
 
             $('.btn-warning').each(function() {
                 $place_id = $(this).attr('id');
